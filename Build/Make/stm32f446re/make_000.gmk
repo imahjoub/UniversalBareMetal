@@ -1,0 +1,56 @@
+
+PATH_TOOLS = $(CURDIR)/../tools
+
+PATH_TOOLS_UTIL = $(PATH_TOOLS)/util
+PATH_TOOLS_GCC  = D:/GitRepos/Embedded-System-Lovers/teensy-4_nxp_iMXRT1062/Build/tools/gcc/gcc-11.2.0-arm-none-eabi/bin
+
+PATH_ENV        = $(CURDIR)/../Make/stm32f446re
+PATH_SRC        = $(CURDIR)/../../Src/stm32f446re
+PATH_TMP        = $(CURDIR)/../Tmp
+PATH_OBJ        = $(PATH_TMP)/Obj
+PATH_BIN        = $(CURDIR)/../Bin/stm32f446re_x64
+
+CC              = $(PATH_TOOLS_GCC)/arm-none-eabi-g++.exe
+OBJCOPY         = $(PATH_TOOLS_GCC)/arm-none-eabi-objcopy.exe
+
+MAKE            = $(PATH_TOOLS_UTIL)/make/make.exe
+
+CFLAGS         = -Wall -Wextra -Wpedantic                                         \
+                -O2                                                               \
+                -mcpu=cortex-m4                                                   \
+                -mtune=cortex-m4                                                  \
+                -mthumb                                                           \
+                -mfloat-abi=hard                                                  \
+                -mfpu=fpv4-sp-d16                                                 \
+                -ffast-math                                                       \
+                -finline-functions                                                \
+                -finline-limit=32                                                 \
+                -mno-unaligned-access                                             \
+                -mno-long-calls
+
+CPPFLAGS       = $(CFLAGS)                                                        \
+                 -fno-rtti                                                        \
+                 -fno-exceptions                                                  \
+                 -fno-use-cxa-atexit
+
+all : clean check_it compile
+
+clean :
+	if not exist $(subst /,\,$(PATH_OBJ)) mkdir $(subst /,\,$(PATH_OBJ))
+	if not exist $(subst /,\,$(PATH_BIN)) mkdir $(subst /,\,$(PATH_BIN))
+	del /Q $(subst /,\,$(PATH_BIN)/*.*)
+	del /Q $(subst /,\,$(PATH_OBJ)/*.*)
+
+check_it :
+	$(MAKE) -v
+	$(CC) -v
+
+compile :
+	$(CC) -x c -std=c11 $(CFLAGS) -c $(PATH_SRC)/app/app.c -o $(PATH_OBJ)/app.o
+	$(CC) -x c++ -std=c++17  $(CFLAGS) -c $(PATH_SRC)/startup/crt0.cpp -o $(PATH_OBJ)/crt0.o
+	$(CC) -x c++ -std=c++17 $(CFLAGS) -c $(PATH_SRC)/startup/crt1.cpp -o $(PATH_OBJ)/crt1.o
+	$(CC) -x c++ -std=c++17 $(CFLAGS) -c $(PATH_SRC)/startup/crt0_init_ram.cpp -o $(PATH_OBJ)/crt0_init_ram.o
+	$(CC) -x c++ -std=c++17 $(CFLAGS) -c $(PATH_SRC)/startup/int_vect.cpp -o $(PATH_OBJ)/int_vect.o
+	$(CC) -x c++ -std=c++17 $(CFLAGS) -c $(PATH_SRC)/startup/mcal_gcc_cxx_completion.cpp -o $(PATH_OBJ)/mcal_gcc_cxx_completion.o
+	$(CC) -x none $(CFLAGS) -nostdlib -nostartfiles -T $(PATH_ENV)/stm32f446re.ld -Wl,--print-memory-usage -Wl,-Map,$(PATH_BIN)/stm32f446re.map $(PATH_OBJ)/app.o $(PATH_OBJ)/crt0.o $(PATH_OBJ)/crt0_init_ram.o $(PATH_OBJ)/crt1.o $(PATH_OBJ)/int_vect.o $(PATH_OBJ)/mcal_gcc_cxx_completion.o -o $(PATH_BIN)/stm32f446re.elf
+	$(OBJCOPY) $(PATH_BIN)/stm32f446re.elf -O ihex $(PATH_BIN)/stm32f446re.hex
