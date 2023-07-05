@@ -2,10 +2,6 @@
 #------------------------------------------------------------------------------
 # Paths and tools
 #------------------------------------------------------------------------------
-PATH_TOOLS = $(CURDIR)/../tools
-
-PATH_TOOLS_UTIL = $(PATH_TOOLS)/util
-PATH_TOOLS_GCC  = $(PATH_TOOLS)/gcc/gcc-11.2.0-arm-none-eabi/bin
 
 PATH_MAKE       = $(CURDIR)/../../Src/Target/Stm32f446re/Make
 PATH_SRC        = $(CURDIR)/../../Src
@@ -13,6 +9,12 @@ PATH_TARGET     = $(PATH_SRC)/Target/Stm32f446re
 PATH_TMP        = $(CURDIR)/../Tmp/Stm32f446re_x64
 PATH_BIN        = $(CURDIR)/../Bin/Stm32f446re_x64
 PATH_OBJ        = $(PATH_TMP)/Obj
+
+ifeq ($(TYP_OS),win)
+
+PATH_TOOLS = $(CURDIR)/../tools
+PATH_TOOLS_UTIL = $(PATH_TOOLS)/util
+PATH_TOOLS_GCC  = $(PATH_TOOLS)/gcc/gcc-11.2.0-arm-none-eabi/bin
 
 CC              = $(PATH_TOOLS_GCC)/arm-none-eabi-g++.exe
 OBJCOPY         = $(PATH_TOOLS_GCC)/arm-none-eabi-objcopy.exe
@@ -22,6 +24,26 @@ MAKE            = $(PATH_TOOLS_UTIL)/make/make.exe
 MKDIR           = $(PATH_TOOLS_UTIL)/bin/mkdir.exe
 RM              = $(PATH_TOOLS_UTIL)/bin/rm.exe
 SED             = $(PATH_TOOLS_UTIL)/bin/sed.exe
+
+MY_NUL         := NUL
+
+endif
+
+ifeq ($(TYP_OS),unix)
+
+CC              = arm-none-eabi-g++
+OBJCOPY         = arm-none-eabi-objcopy
+OBJDUMP         = arm-none-eabi-objdump
+READELF         = arm-none-eabi-readelf
+
+MAKE            = make
+ECHO            = echo
+RM              = rm
+MKDIR           = mkdir
+
+MY_NUL         := /dev/null
+
+endif
 
 #------------------------------------------------------------------------------
 # Toolchain flags
@@ -49,13 +71,18 @@ CPPFLAGS       = $(CFLAGS)                                                      
 # Build targets
 #------------------------------------------------------------------------------
 
-all : clean check_it compile
+all : clean_all compile
 
-clean :
-	if not exist $(subst /,\,$(PATH_OBJ)) mkdir $(subst /,\,$(PATH_OBJ))
-	if not exist $(subst /,\,$(PATH_BIN)) mkdir $(subst /,\,$(PATH_BIN))
-	del /Q $(subst /,\,$(PATH_BIN)/*.*)
-	del /Q $(subst /,\,$(PATH_OBJ)/*.*)
+.PHONY : clean_all
+clean_all :
+	@-$(ECHO) +++ cleaning all
+	@-$(MKDIR) -p $(PATH_BIN)
+	@-$(MKDIR) -p $(PATH_OBJ)
+	@-$(RM) -r $(PATH_BIN) 2>$(MY_NUL)
+	@-$(RM) -r $(PATH_OBJ) 2>$(MY_NUL)
+	@-$(MKDIR) -p $(PATH_BIN)
+	@-$(MKDIR) -p $(PATH_OBJ)
+	@-$(ECHO)
 
 check_it :
 	$(MAKE) -v
