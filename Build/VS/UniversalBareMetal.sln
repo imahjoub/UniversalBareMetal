@@ -20,6 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_doc", "_doc", "{C8685A91-E
 		..\..\README.md = ..\..\README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{EE2F76E0-9A8F-413D-B3C4-4EB3DCB3D8F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{3F4A0E45-C424-433F-AD26-7F5B5CDD1FBE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.github\workflows\UniversalBareMetal.yml = ..\..\.github\workflows\UniversalBareMetal.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -39,6 +46,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CCA53F62-AD92-4767-9BB8-B951EB13B6D5} = {EEE84942-1896-48C9-AEC5-020A275BD455}
+		{3F4A0E45-C424-433F-AD26-7F5B5CDD1FBE} = {EE2F76E0-9A8F-413D-B3C4-4EB3DCB3D8F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD56A915-06D2-43CB-BF57-5A574389E7E5}
