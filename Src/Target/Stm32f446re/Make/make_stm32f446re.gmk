@@ -90,10 +90,10 @@ check_it :
 
 compile :
 	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_SRC)/App/App.cpp -o $(PATH_OBJ)/app.o
-	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt0.cpp -o $(PATH_OBJ)/crt0.o
-	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt1.cpp -o $(PATH_OBJ)/crt1.o
-	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt0_init_ram.cpp -o $(PATH_OBJ)/crt0_init_ram.o
-	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/int_vect.cpp -o $(PATH_OBJ)/int_vect.o
-	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/mcal_gcc_cxx_completion.cpp -o $(PATH_OBJ)/mcal_gcc_cxx_completion.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/Startup/crt0.cpp -o $(PATH_OBJ)/crt0.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/Startup/crt1.cpp -o $(PATH_OBJ)/crt1.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/Startup/crt0_init_ram.cpp -o $(PATH_OBJ)/crt0_init_ram.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/Startup/int_vect.cpp -o $(PATH_OBJ)/int_vect.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/Startup/mcal_gcc_cxx_completion.cpp -o $(PATH_OBJ)/mcal_gcc_cxx_completion.o
 	$(CC) -x none $(CPPFLAGS) -nostdlib -nostartfiles -T $(PATH_MAKE)/stm32f446re.ld -Wl,--print-memory-usage -Wl,-Map,$(PATH_BIN)/stm32f446re.map $(PATH_OBJ)/app.o $(PATH_OBJ)/crt0.o $(PATH_OBJ)/crt0_init_ram.o $(PATH_OBJ)/crt1.o $(PATH_OBJ)/int_vect.o $(PATH_OBJ)/mcal_gcc_cxx_completion.o -o $(PATH_BIN)/stm32f446re.elf
 	$(OBJCOPY) $(PATH_BIN)/stm32f446re.elf -O ihex $(PATH_BIN)/stm32f446re.hex
