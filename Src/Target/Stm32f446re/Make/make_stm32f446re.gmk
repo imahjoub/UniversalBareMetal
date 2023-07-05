@@ -89,7 +89,7 @@ check_it :
 	$(CC) -v
 
 compile :
-	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_SRC)/app/app.cpp -o $(PATH_OBJ)/app.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_SRC)/App/App.cpp -o $(PATH_OBJ)/app.o
 	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt0.cpp -o $(PATH_OBJ)/crt0.o
 	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt1.cpp -o $(PATH_OBJ)/crt1.o
 	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt0_init_ram.cpp -o $(PATH_OBJ)/crt0_init_ram.o
