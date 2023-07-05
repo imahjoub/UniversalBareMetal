@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{EEE84942
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Make", "Make", "{CCA53F62-AD92-4767-9BB8-B951EB13B6D5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stm32f446re", "stm32f446re", "{0A682DC0-B651-477C-80F6-769DEF18CF08}"
 	ProjectSection(SolutionItems) = preProject
-		..\Make\stm32f446re\make_000.gmk = ..\Make\stm32f446re\make_000.gmk
-		..\Make\stm32f446re\stm32f446re.ld = ..\Make\stm32f446re\stm32f446re.ld
+		..\Make\make_000.gmk = ..\Make\make_000.gmk
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_doc", "_doc", "{C8685A91-E77C-42E9-8D35-B36C54AE7347}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\README.md = ..\..\README.md
 	EndProjectSection
 EndProject
 Global
@@ -37,7 +39,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CCA53F62-AD92-4767-9BB8-B951EB13B6D5} = {EEE84942-1896-48C9-AEC5-020A275BD455}
-		{0A682DC0-B651-477C-80F6-769DEF18CF08} = {CCA53F62-AD92-4767-9BB8-B951EB13B6D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD56A915-06D2-43CB-BF57-5A574389E7E5}

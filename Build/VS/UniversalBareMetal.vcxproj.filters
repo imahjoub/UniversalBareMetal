@@ -8,16 +8,63 @@
     <Filter Include="Source Files\Src">
       <UniqueIdentifier>{1e873f96-6316-4cdc-8eb5-d0076bb4f845}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Src\stm32f446re">
+    <Filter Include="Source Files\Src\App">
+      <UniqueIdentifier>{81922542-e3cd-4006-a787-e18c6807c8f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target">
+      <UniqueIdentifier>{c82cbd11-d189-450a-a7cd-be261b671db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\Stm32f446re">
       <UniqueIdentifier>{c2c8a067-58d7-4d3d-bf99-d9ad245d1603}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Src\stm32f446re\app">
+    <Filter Include="Source Files\Src\Target\Stm32f446re\Startup">
       <UniqueIdentifier>{09a60374-ec83-484c-bd6a-9d3311a775d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\Stm32f446re\Mcal">
+      <UniqueIdentifier>{ea042799-451b-4e1d-a9ee-3bc7a94f329b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\Stm32f446re\Make">
+      <UniqueIdentifier>{844975ca-72d3-432e-9163-55d9f8130511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Host">
+      <UniqueIdentifier>{4952d30c-12fd-4ca7-80e2-f3e33955723c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Host\Make">
+      <UniqueIdentifier>{5c45d224-1bd2-4880-a02a-df18b53f1b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Host\Startup">
+      <UniqueIdentifier>{73d22734-e9b0-4962-a2e5-acfc57c616a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Host\Mcal">
+      <UniqueIdentifier>{2da08224-fb44-418b-832e-93ca62bd6c72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\stm32f446re\App\app.c">
-      <Filter>Source Files\Src\stm32f446re\app</Filter>
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt0.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Startup</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt0_init_ram.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt1.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\int_vect.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\mcal_gcc_cxx_completion.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\App\App.cpp">
+      <Filter>Source Files\Src\App</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Src\target\stm32f446re\make\make_stm32f446re.gmk">
+      <Filter>Source Files\Src\Target\Stm32f446re\Make</Filter>
+    </None>
+    <None Include="..\..\Src\target\stm32f446re\make\stm32f446re.ld">
+      <Filter>Source Files\Src\Target\Stm32f446re\Make</Filter>
+    </None>
   </ItemGroup>
 </Project>

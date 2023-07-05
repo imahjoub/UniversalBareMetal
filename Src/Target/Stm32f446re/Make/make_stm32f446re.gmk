@@ -1,0 +1,72 @@
+
+#------------------------------------------------------------------------------
+# Paths and tools
+#------------------------------------------------------------------------------
+PATH_TOOLS = $(CURDIR)/../tools
+
+PATH_TOOLS_UTIL = $(PATH_TOOLS)/util
+PATH_TOOLS_GCC  = $(PATH_TOOLS)/gcc/gcc-11.2.0-arm-none-eabi/bin
+
+PATH_MAKE       = $(CURDIR)/../../Src/Target/Stm32f446re/Make
+PATH_SRC        = $(CURDIR)/../../Src
+PATH_TARGET     = $(PATH_SRC)/Target/Stm32f446re
+PATH_TMP        = $(CURDIR)/../Tmp/Stm32f446re_x64
+PATH_BIN        = $(CURDIR)/../Bin/Stm32f446re_x64
+PATH_OBJ        = $(PATH_TMP)/Obj
+
+CC              = $(PATH_TOOLS_GCC)/arm-none-eabi-g++.exe
+OBJCOPY         = $(PATH_TOOLS_GCC)/arm-none-eabi-objcopy.exe
+
+ECHO            = $(PATH_TOOLS_UTIL)/bin/echo.exe
+MAKE            = $(PATH_TOOLS_UTIL)/make/make.exe
+MKDIR           = $(PATH_TOOLS_UTIL)/bin/mkdir.exe
+RM              = $(PATH_TOOLS_UTIL)/bin/rm.exe
+SED             = $(PATH_TOOLS_UTIL)/bin/sed.exe
+
+#------------------------------------------------------------------------------
+# Toolchain flags
+#------------------------------------------------------------------------------
+
+CFLAGS         = -Wall -Wextra -Wpedantic                                         \
+                -O2                                                               \
+                -mcpu=cortex-m4                                                   \
+                -mtune=cortex-m4                                                  \
+                -mthumb                                                           \
+                -mfloat-abi=hard                                                  \
+                -mfpu=fpv4-sp-d16                                                 \
+                -ffast-math                                                       \
+                -finline-functions                                                \
+                -finline-limit=32                                                 \
+                -mno-unaligned-access                                             \
+                -mno-long-calls
+
+CPPFLAGS       = $(CFLAGS)                                                        \
+                 -fno-rtti                                                        \
+                 -fno-exceptions                                                  \
+                 -fno-use-cxa-atexit
+
+#------------------------------------------------------------------------------
+# Build targets
+#------------------------------------------------------------------------------
+
+all : clean check_it compile
+
+clean :
+	if not exist $(subst /,\,$(PATH_OBJ)) mkdir $(subst /,\,$(PATH_OBJ))
+	if not exist $(subst /,\,$(PATH_BIN)) mkdir $(subst /,\,$(PATH_BIN))
+	del /Q $(subst /,\,$(PATH_BIN)/*.*)
+	del /Q $(subst /,\,$(PATH_OBJ)/*.*)
+
+check_it :
+	$(MAKE) -v
+	$(CC) -v
+
+compile :
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_SRC)/app/app.cpp -o $(PATH_OBJ)/app.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt0.cpp -o $(PATH_OBJ)/crt0.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt1.cpp -o $(PATH_OBJ)/crt1.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/crt0_init_ram.cpp -o $(PATH_OBJ)/crt0_init_ram.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/int_vect.cpp -o $(PATH_OBJ)/int_vect.o
+	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_TARGET)/startup/mcal_gcc_cxx_completion.cpp -o $(PATH_OBJ)/mcal_gcc_cxx_completion.o
+	$(CC) -x none $(CPPFLAGS) -nostdlib -nostartfiles -T $(PATH_MAKE)/stm32f446re.ld -Wl,--print-memory-usage -Wl,-Map,$(PATH_BIN)/stm32f446re.map $(PATH_OBJ)/app.o $(PATH_OBJ)/crt0.o $(PATH_OBJ)/crt0_init_ram.o $(PATH_OBJ)/crt1.o $(PATH_OBJ)/int_vect.o $(PATH_OBJ)/mcal_gcc_cxx_completion.o -o $(PATH_BIN)/stm32f446re.elf
+	$(OBJCOPY) $(PATH_BIN)/stm32f446re.elf -O ihex $(PATH_BIN)/stm32f446re.hex

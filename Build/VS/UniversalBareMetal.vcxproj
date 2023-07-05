@@ -14,6 +14,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\App\App.cpp" />
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt0.cpp" />
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt0_init_ram.cpp" />
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt1.cpp" />
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\int_vect.cpp" />
+    <ClCompile Include="..\..\Src\target\stm32f446re\startup\mcal_gcc_cxx_completion.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Src\target\stm32f446re\make\make_stm32f446re.gmk" />
+    <None Include="..\..\Src\target\stm32f446re\make\stm32f446re.ld" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{32D529D9-6963-472C-9BB3-1E4E1933FC56}</ProjectGuid>
@@ -71,7 +83,7 @@
     <NMakeBuildCommandLine>..\build.bat build</NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>..\build.bat all</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>..\build.bat clean</NMakeCleanCommandLine>
-    <NMakeOutput>stm32f446re.elf</NMakeOutput>
+    <NMakeOutput>$(Configuration).elf</NMakeOutput>
     <NMakePreprocessorDefinitions>__GNUC__=12;__attribute__()=</NMakePreprocessorDefinitions>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -86,12 +98,9 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">
     <BuildLog>
-      <Path>$(SolutionDir)..\Tmp\log\$(Configuration)_$(Platform)\_BuildLog.htm</Path>
+      <Path>$(SolutionDir)..\Tmp\$(Configuration)_$(Platform)\$(Configuration)_BuildLog.htm</Path>
     </BuildLog>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Src\stm32f446re\App\app.c" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
