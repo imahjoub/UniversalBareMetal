@@ -71,7 +71,7 @@ CPPFLAGS       = $(CFLAGS)                                                      
 # Build targets
 #------------------------------------------------------------------------------
 
-all : clean_all compile
+all : clean_all print_version compile
 
 .PHONY : clean_all
 clean_all :
@@ -84,9 +84,14 @@ clean_all :
 	@-$(MKDIR) -p $(PATH_OBJ)
 	@-$(ECHO)
 
-check_it :
-	$(MAKE) -v
-	$(CC) -v
+.PHONY : print_version
+print_version :
+	@$(ECHO) +++ print GNUmake version
+	@$(MAKE) --version
+	@$(ECHO)
+	@$(ECHO) +++ print GCC version
+	@$(CC) -v
+	@$(ECHO)
 
 compile :
 	$(CC) -x c++ -std=c++17 $(CPPFLAGS) -c $(PATH_SRC)/App/App.cpp -o $(PATH_OBJ)/app.o
