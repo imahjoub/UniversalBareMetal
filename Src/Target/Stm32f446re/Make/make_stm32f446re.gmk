@@ -50,6 +50,7 @@ MAKE            = make
 ECHO            = echo
 RM              = rm
 MKDIR           = mkdir
+SED             = sed
 
 MY_NUL         := /dev/null
 
