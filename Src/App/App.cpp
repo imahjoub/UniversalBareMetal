@@ -1,22 +1,20 @@
 #include <cstdint>
 
-auto mcal_init() -> void
+#include <Mcal/mcal.h>
+#include <Util/util_time.h>
+
+namespace local
 {
-  #define RCC_AHB1ENR  (*(volatile unsigned*) 0x40023830U)
-  #define GPIOA_MODER  (*(volatile unsigned*) 0x40020000U)
+  using timer_type = util::timer<std::uint32_t>;
 
-  RCC_AHB1ENR |= 1U;
-
-  GPIOA_MODER |= (1U << (5U * 2U));
-  GPIOA_MODER &= ~(1U << ((5U * 2U) + 1U));
+  constexpr auto one_sec =
+    static_cast<std::uint32_t>
+    (
+      timer_type::seconds(static_cast<unsigned>(UINT8_C(1)))
+    );
 }
 
-auto mcal_led_toggle() -> void
-{
-  #define GPIOA_ODR    (*(volatile unsigned*) 0x40020014U)
-
-  GPIOA_ODR ^= (1U << 5); // toggle PortA.5
-}
+auto main() -> int;
 
 auto main() -> int
 {
@@ -26,6 +24,6 @@ auto main() -> int
   {
     mcal_led_toggle();
 
-    for(volatile unsigned count = 0U; count < 100000U; ++count) { ; }
+    local::timer_type::blocking_delay(local::one_sec);
   }
 }

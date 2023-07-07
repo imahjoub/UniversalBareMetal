@@ -8,6 +8,8 @@
 // STM32 EABI ARM(R) Cortex-M4(TM) startup code.
 // Expressed with C++ for STM32F4xx by Chris.
 
+#include <Mcal/mcal_cpu.h>
+
 namespace crt
 {
   void init_ram();
@@ -23,17 +25,15 @@ void __my_startup()
   // the base position of the interrupt vector table.
   // So we do nothing here.
 
-  // Chip init: Watchdog, port, and oscillator.
-  //mcal::cpu::init();
+  // Chip init: oscillator and optionally other low-level things.
+  mcal::cpu::init();
 
   // Initialize statics from ROM to RAM.
   // Zero-clear default-initialized static RAM.
   crt::init_ram();
-  //mcal::wdg::secure::trigger();
 
   // Call all ctor initializations.
   crt::init_ctors();
-  //mcal::wdg::secure::trigger();
 
   // Jump to main (and never return).
   asm volatile("ldr r3, =main");
@@ -43,6 +43,6 @@ void __my_startup()
   for(;;)
   {
     // Replace with a loud error if desired.
-    //mcal::wdg::secure::trigger();
+    ;
   }
 }

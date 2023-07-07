@@ -26,17 +26,14 @@
     <Filter Include="Source Files\Src\Target\Stm32f446re\Make">
       <UniqueIdentifier>{844975ca-72d3-432e-9163-55d9f8130511}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Src\Host">
+    <Filter Include="Source Files\Src\Target\Host">
       <UniqueIdentifier>{4952d30c-12fd-4ca7-80e2-f3e33955723c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Src\Host\Make">
-      <UniqueIdentifier>{5c45d224-1bd2-4880-a02a-df18b53f1b24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Src\Host\Startup">
-      <UniqueIdentifier>{73d22734-e9b0-4962-a2e5-acfc57c616a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Src\Host\Mcal">
+    <Filter Include="Source Files\Src\Target\Host\Mcal">
       <UniqueIdentifier>{2da08224-fb44-418b-832e-93ca62bd6c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Util">
+      <UniqueIdentifier>{57dcff24-5694-469b-a439-0d40ca4ed911}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +55,27 @@
     <ClCompile Include="..\..\Src\App\App.cpp">
       <Filter>Source Files\Src\App</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Target\Host\Mcal\mcal_gpt.cpp">
+      <Filter>Source Files\Src\Target\Host\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\Stm32f446re\Mcal\mcal.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\Host\Mcal\mcal.cpp">
+      <Filter>Source Files\Src\Target\Host\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_gpt.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_osc.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_osc_detail.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_cpu.cpp">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Src\target\stm32f446re\make\make_stm32f446re.gmk">
@@ -66,5 +84,52 @@
     <None Include="..\..\Src\target\stm32f446re\make\stm32f446re.ld">
       <Filter>Source Files\Src\Target\Stm32f446re\Make</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal_gpt.h">
+      <Filter>Source Files\Src\Target\Host\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal_irq.h">
+      <Filter>Source Files\Src\Target\Host\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal_cpu.h">
+      <Filter>Source Files\Src\Target\Host\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal.h">
+      <Filter>Source Files\Src\Target\Host\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Util\util_time.h">
+      <Filter>Source Files\Src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_gpt_arm_sys_tick.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_gpt.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_reg.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_cpu.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_osc.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_osc_detail.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_reg_access_dynamic.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal_reg_access_static.h">
+      <Filter>Source Files\Src\Target\Stm32f446re\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Util\util_noncopyable.h">
+      <Filter>Source Files\Src\Util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
