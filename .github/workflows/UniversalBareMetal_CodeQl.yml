@@ -43,9 +43,9 @@ jobs:
         run: sudo apt install gcc-arm-none-eabi
       - name: target-ubuntu-${{ matrix.suite }}
         run: |
-          pwd
-          make -f ./Build/Make/make_000.gmk ${{ matrix.suite }} TYP_OS=unix
-          ls -la ./Build/Bin/Stm32f446re_x64/stm32f446re.elf ../Bin/Stm32f446re_x64/stm32f446re.hex
+          cd ./Build/VS
+          make -f ../Make/make_000.gmk ${{ matrix.suite }} TYP_OS=unix
+          ls -la ../Bin/Stm32f446re_x64/stm32f446re.elf ../Bin/Stm32f446re_x64/stm32f446re.hex
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:
