@@ -3,6 +3,8 @@
 <p align="center">
     <a href="https://github.com/imahjoub/UniversalBareMetal/actions">
         <img src="https://github.com/imahjoub/UniversalBareMetal/actions/workflows/UniversalBareMetal.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://github.com/imahjoub/UniversalBareMetal/actions/workflows/UniversalBareMetal_CodeQl.yml">
+        <img src="https://github.com/imahjoub/UniversalBareMetal/actions/workflows/UniversalBareMetal_CodeQl/badge.svg" alt="CodeQL"></a>
     <a href="https://github.com/imahjoub/UniversalBareMetal/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">
         <img src="https://custom-icon-badges.herokuapp.com/github/issues-raw/imahjoub/UniversalBareMetal?logo=github" alt="Issues" /></a>
     <a href="https://github.com/imahjoub/UniversalBareMetal/blob/main/LICENSE">
