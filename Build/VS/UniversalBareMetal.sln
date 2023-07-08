@@ -25,6 +25,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{3F4A0E45-C424-433F-AD26-7F5B5CDD1FBE}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\.github\workflows\UniversalBareMetal.yml = ..\..\.github\workflows\UniversalBareMetal.yml
+		..\..\.github\workflows\UniversalBareMetal_CodeQl.yml = ..\..\.github\workflows\UniversalBareMetal_CodeQl.yml
 	EndProjectSection
 EndProject
 Global
