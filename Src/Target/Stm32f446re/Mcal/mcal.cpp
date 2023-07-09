@@ -18,12 +18,15 @@ namespace local
 extern "C"
 void mcal_init(void)
 {
+  mcal::gpt::init(nullptr);
+
+  // Enable the GPIOG peripheral clock
   mcal::reg::reg_access_static<std::uint32_t, std::uint32_t, mcal::reg::rcc_ahb1enr, static_cast<std::uint32_t>(UINT8_C(1))>::reg_or();
 
+  // Configure the GPIO pin to output mode
   mcal::reg::reg_access_static<std::uint32_t, std::uint32_t, mcal::reg::gpioa_moder, static_cast<std::uint32_t>((1U << (5U * 2U)))>::reg_or();
   mcal::reg::reg_access_static<std::uint32_t, std::uint32_t, mcal::reg::gpioa_moder, static_cast<std::uint32_t>(~(1U << ((5U * 2U) + 1U)))>::reg_and();
 
-  mcal::gpt::init(nullptr);
 
   // Enable global interrupts.
   asm volatile("cpsie i");
