@@ -52,5 +52,5 @@ jobs:
         working-directory: .\Build\VS
         run: |
           MSBuild -m UniversalBareMetal.sln -p:useenv=false -p:Configuration=${{ matrix.suite }} -p:Platform=x64 /t:Rebuild
-          dir ..\Bin\${{ matrix.suite }}_x64\teensy-4_nxp_iMXRT1062.exe
+          dir ..\Bin\${{ matrix.suite }}_x64\UniversalBareMetal.exe
 
