@@ -5,8 +5,8 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H_
-  #define MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H_
+#ifndef MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H
+  #define MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H
 
   #if defined(__GNUC__) && (__GNUC__ >= 12)
   #pragma GCC diagnostic push
@@ -50,4 +50,4 @@
   #pragma GCC diagnostic pop
   #endif
 
-#endif // MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H_
+#endif // MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H
