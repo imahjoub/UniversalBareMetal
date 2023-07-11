@@ -72,7 +72,6 @@
         my_is_init = true;
 
         // Set up an interrupt on the ARM(R) sys-tick.
-
         base_class_type::template reg_access_static<base_class_type::sys_tick_ctrl, static_cast<register_value_type>(UINT8_C(0))>::reg_set();
 
         // Set the sys-tick reload register.

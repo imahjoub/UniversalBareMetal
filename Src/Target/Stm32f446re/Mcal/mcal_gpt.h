@@ -5,8 +5,8 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef MCAL_GPT_2011_10_20_H_
-  #define MCAL_GPT_2011_10_20_H_
+#ifndef MCAL_GPT_2011_10_20_H
+  #define MCAL_GPT_2011_10_20_H
 
   #include <cstdint>
 
@@ -39,4 +39,4 @@
 
   inline auto mcal::gpt::init(const config_type*) noexcept -> void { arm_sys_tick_type::init(); }
 
-#endif // MCAL_GPT_2011_10_20_H_
+#endif // MCAL_GPT_2011_10_20_H

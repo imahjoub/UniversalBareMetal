@@ -5,8 +5,8 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef MCAL_REG_2010_04_10_H_
-  #define MCAL_REG_2010_04_10_H_
+#ifndef MCAL_REG_2010_04_10_H
+  #define MCAL_REG_2010_04_10_H
 
   #include <cstdint>
 
@@ -189,4 +189,4 @@
   #include <Mcal/mcal_reg_access_dynamic.h>
   #include <Mcal/mcal_reg_access_static.h>
 
-#endif // MCAL_REG_2010_04_10_H_
+#endif // MCAL_REG_2010_04_10_H
