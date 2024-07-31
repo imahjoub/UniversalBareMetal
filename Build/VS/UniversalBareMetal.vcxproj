@@ -13,14 +13,21 @@
       <Configuration>stm32f446re</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="stm32l432kc|x64">
+      <Configuration>stm32l432kc</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\App\App.cpp" />
+    <ClCompile Include="..\..\Src\App\Cpp\App.cpp" />
+    <ClCompile Include="..\..\Src\App\C\App.c" />
     <ClCompile Include="..\..\Src\Target\Host\Mcal\mcal.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Src\Target\Host\Mcal\mcal_gpt.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Src\Target\Stm32f446re\Mcal\mcal.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -62,23 +69,34 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32l432kc\Mcal\Gpt.c" />
+    <ClCompile Include="..\..\Src\Target\stm32l432kc\Mcal\Mcu.c" />
+    <ClCompile Include="..\..\Src\Target\stm32l432kc\Mcal\SysTick.c" />
+    <ClCompile Include="..\..\Src\Target\stm32l432kc\Startup\IntVect.c" />
+    <ClCompile Include="..\..\Src\Target\stm32l432kc\Startup\SysStartup.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Src\target\stm32f446re\make\make_stm32f446re.gmk" />
     <None Include="..\..\Src\target\stm32f446re\make\stm32f446re.ld" />
+    <None Include="..\..\Src\Target\stm32l432kc\Make\make_stm32l432kc.gmk" />
+    <None Include="..\..\Src\Target\stm32l432kc\Make\stm32l432kc.ld" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal_cpu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal_gpt.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\Host\Mcal\mcal_irq.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\Stm32f446re\Mcal\mcal.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -116,8 +134,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Util\util_noncopyable.h" />
-    <ClInclude Include="..\..\Src\Util\util_time.h" />
+    <ClInclude Include="..\..\Src\Target\stm32l432kc\Mcal\Gpt.h" />
+    <ClInclude Include="..\..\Src\Target\stm32l432kc\Mcal\Mcu.h" />
+    <ClInclude Include="..\..\Src\Target\stm32l432kc\Mcal\Reg.h" />
+    <ClInclude Include="..\..\Src\Target\stm32l432kc\Mcal\SysTick.h" />
+    <ClInclude Include="..\..\Src\Util\Cpp\util_noncopyable.h" />
+    <ClInclude Include="..\..\Src\Util\Cpp\util_time.h" />
+    <ClInclude Include="..\..\Src\Util\C\UtilTimer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -137,6 +160,10 @@
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">
+    <PlatformToolset>v143</PlatformToolset>
+    <ConfigurationType>Makefile</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'" Label="Configuration">
     <PlatformToolset>v143</PlatformToolset>
     <ConfigurationType>Makefile</ConfigurationType>
   </PropertyGroup>
@@ -175,13 +202,23 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">
     <OutDir>$(SolutionDir)..\Bin\$(Configuration)_$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\Tmp\$(Configuration)_$(Platform)\</IntDir>
-    <NMakeBuildCommandLine>..\build.bat build</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>..\build.bat all</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>..\build.bat clean</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>..\build.bat build stm32f446re win</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>..\build.bat all stm32f446re win</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>..\build.bat clean stm32f446re win</NMakeCleanCommandLine>
     <NMakeOutput>
     </NMakeOutput>
     <NMakePreprocessorDefinitions>__GNUC__=12;__attribute__()=</NMakePreprocessorDefinitions>
     <NMakeIncludeSearchPath>$(SolutionDir)../../Src/Target/Stm32f446re;$(SolutionDir)../../Src</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">
+    <OutDir>$(SolutionDir)..\Bin\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\Tmp\$(Configuration)_$(Platform)\</IntDir>
+    <NMakeBuildCommandLine>..\build.bat build stm32l432kc win</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>..\build.bat all stm32l432kc win</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>..\build.bat clean stm32l432kc win</NMakeCleanCommandLine>
+    <NMakeOutput> </NMakeOutput>
+    <NMakePreprocessorDefinitions>__GNUC__=12;__attribute__()=</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(SolutionDir)../../Src/Target/Stm32l432kc;$(SolutionDir)../../Src</NMakeIncludeSearchPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <BuildLog>
@@ -194,6 +231,11 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='stm32f446re|x64'">
+    <BuildLog>
+      <Path>$(SolutionDir)..\Tmp\$(Configuration)_$(Platform)\$(Configuration)_BuildLog.htm</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='stm32l432kc|x64'">
     <BuildLog>
       <Path>$(SolutionDir)..\Tmp\$(Configuration)_$(Platform)\$(Configuration)_BuildLog.htm</Path>
     </BuildLog>

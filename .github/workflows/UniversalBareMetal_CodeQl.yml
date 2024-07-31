@@ -45,7 +45,7 @@ jobs:
         working-directory: ./Build/VS
         run: |
           make -f ../Make/make_000.gmk ${{ matrix.suite }} TYP_OS=unix
-          ls -la ../Bin/Stm32f446re_x64/stm32f446re.elf ../Bin/Stm32f446re_x64/stm32f446re.hex
+          ls -la ../Bin/stm32f446re_x64/stm32f446re.elf ../Bin/stm32f446re_x64/stm32f446re.hex
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:

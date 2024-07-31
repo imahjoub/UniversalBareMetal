@@ -11,18 +11,20 @@
 # Paths and tools
 #------------------------------------------------------------------------------
 
-PATH_MAKE       = $(CURDIR)/../../Src/Target/stm32f446re/Make
+PATH_MAKE       = $(CURDIR)/../../Src/Target/stm32l432kc/Make
 PATH_SRC        = $(CURDIR)/../../Src
-PATH_TARGET     = $(PATH_SRC)/Target/stm32f446re
-PATH_TMP        = $(CURDIR)/../Tmp/stm32f446re_x64
-PATH_BIN        = $(CURDIR)/../Bin/stm32f446re_x64
+PATH_TARGET     = $(PATH_SRC)/Target/stm32l432kc
+PATH_TMP        = $(CURDIR)/../Tmp/stm32l432kc_x64
+PATH_BIN        = $(CURDIR)/../Bin/stm32l432kc_x64
 PATH_OBJ        = $(PATH_TMP)/Obj
+
 
 ifeq ($(TYP_OS),win)
 
-PATH_TOOLS = $(CURDIR)/../tools
+PATH_TOOLS      = $(CURDIR)/../tools
 PATH_TOOLS_UTIL = $(PATH_TOOLS)/util
 PATH_TOOLS_GCC  = $(PATH_TOOLS)/gcc/gcc-11.2.0-arm-none-eabi/bin
+
 
 CC              = $(PATH_TOOLS_GCC)/arm-none-eabi-g++.exe
 OBJCOPY         = $(PATH_TOOLS_GCC)/arm-none-eabi-objcopy.exe
@@ -30,7 +32,7 @@ OBJDUMP         = $(PATH_TOOLS_GCC)/arm-none-eabi-objdump.exe
 READELF         = $(PATH_TOOLS_GCC)/arm-none-eabi-readelf.exe
 
 ECHO            = $(PATH_TOOLS_UTIL)/bin/echo.exe
-MAKE            = $(PATH_TOOLS_UTIL)/make/make.exe
+MAKE            = $(PATH_TOOLS_UTIL)/bin/make.exe
 MKDIR           = $(PATH_TOOLS_UTIL)/bin/mkdir.exe
 RM              = $(PATH_TOOLS_UTIL)/bin/rm.exe
 SED             = $(PATH_TOOLS_UTIL)/bin/sed.exe
@@ -81,27 +83,39 @@ WFLAGS         = -Wall                                                     \
                  -Wdouble-promotion                                        \
                  -Wno-comment
 
-CFLAGS         = -O2                                                       \
-                 $(WFLAGS)                                                 \
-                 -mcpu=cortex-m7                                           \
-                 -mtune=cortex-m7                                          \
+C_INCLUDES     = -I$(PATH_SRC)                                             \
+                 -I$(PATH_TARGET)
+
+C_DEFINES      = -DSTM32F446xx
+
+CFLAGS_BASE    = $(WFLAGS)                                                 \
+                 -mcpu=cortex-m4                                           \
+                 -mtune=cortex-m4                                          \
                  -mthumb                                                   \
                  -mfloat-abi=hard                                          \
-                 -march=armv7e-m+fpv5-d16                                  \
+                 -mfpu=fpv4-sp-d16                                         \
+                 -ffast-math                                               \
                  -mno-unaligned-access                                     \
                  -mno-long-calls                                           \
                  -ffast-math                                               \
-                 -finline-functions                                        \
-                 -finline-limit=32                                         \
+                 -fno-inline-functions                                     \
+                 -g                                                        \
                  -gdwarf-2                                                 \
                  -fno-exceptions                                           \
                  -ffunction-sections                                       \
                  -fdata-sections                                           \
                  -MMD -MF $(PATH_OBJ)/$(basename $(@F)).d                  \
-                 -I$(PATH_TARGET)                                          \
-                 -I$(PATH_SRC)
+                 $(C_INCLUDES)                                             \
+                 $(C_DEFINES)
 
-CPPFLAGS       = $(CFLAGS)                                                 \
+
+CFLAGS         = -O0                                                       \
+                 -std=c2x                                                  \
+                 $(CFLAGS_BASE)
+
+CPPFLAGS       = -O2                                                       \
+                 -std=c++20                                                \
+                 $(CFLAGS_BASE)                                            \
                  -fno-rtti                                                 \
                  -fno-use-cxa-atexit                                       \
                  -fno-nonansi-builtins                                     \
@@ -116,26 +130,23 @@ LDFLAGS        = $(CPPFLAGS)                                               \
                  -nostartfiles                                             \
                  -specs=nano.specs                                         \
                  -specs=nosys.specs                                        \
-                 -T $(PATH_MAKE)/stm32f446re.ld                            \
+                 -T $(PATH_MAKE)/stm32l432kc.ld                            \
                  -Wl,--print-memory-usage                                  \
-                 -Wl,-Map,$(PATH_BIN)/stm32f446re.map
+                 -Wl,-Map,$(PATH_BIN)/stm32l432kc.map
 
 
 #------------------------------------------------------------------------------
 # Source files
 #------------------------------------------------------------------------------
 
-SRC_FILES      = $(PATH_SRC)/App/Cpp/App                                   \
-                 $(PATH_TARGET)/Mcal/mcal                                  \
-                 $(PATH_TARGET)/Mcal/mcal_cpu                              \
-                 $(PATH_TARGET)/Mcal/mcal_gpt                              \
-                 $(PATH_TARGET)/Mcal/mcal_osc                              \
-                 $(PATH_TARGET)/Mcal/mcal_osc_detail                       \
-                 $(PATH_TARGET)/Startup/crt0                               \
-                 $(PATH_TARGET)/Startup/crt0_init_ram                      \
-                 $(PATH_TARGET)/Startup/crt1                               \
-                 $(PATH_TARGET)/Startup/int_vect                           \
-                 $(PATH_TARGET)/Startup/mcal_gcc_cxx_completion
+SRC_FILES      = $(PATH_SRC)/App/C/App                                     \
+                 $(PATH_TARGET)/Mcal/Gpt                                   \
+                 $(PATH_TARGET)/Mcal/Mcu                                   \
+                 $(PATH_TARGET)/Mcal/SysTick                               \
+                 $(PATH_TARGET)/Startup/IntVect                            \
+                 $(PATH_TARGET)/Startup/SysStartup
+
+
 
 
 #------------------------------------------------------------------------------
@@ -150,7 +161,7 @@ FILES_O := $(addprefix $(PATH_OBJ)/, $(notdir $(addsuffix .o, $(SRC_FILES))))
 # Build targets
 #------------------------------------------------------------------------------
 
-all : clean_all print_version $(PATH_BIN)/stm32f446re.elf
+all : clean_all print_version $(PATH_BIN)/stm32l432kc.elf
 
 .PHONY : clean_all
 clean_all :
@@ -172,17 +183,17 @@ print_version :
 	@$(CC) -v
 	@$(ECHO)
 
-$(PATH_BIN)/stm32f446re.elf : $(FILES_O)
+$(PATH_BIN)/stm32l432kc.elf : $(FILES_O)
 	@-$(ECHO)
-	@-$(ECHO) +++ linking application to absolute object file $(PATH_BIN)/stm32f446re.elf
-	@-$(CC) -x none $(LDFLAGS) $(FILES_O) -o $(PATH_BIN)/stm32f446re.elf
+	@-$(ECHO) +++ linking application to absolute object file $(PATH_BIN)/stm32l432kc.elf
+	@-$(CC) -x none $(LDFLAGS) $(FILES_O) -o $(PATH_BIN)/stm32l432kc.elf
 	@-$(ECHO)
-	@-$(ECHO) +++ create HEX-file $(PATH_BIN)/stm32f446re.hex
-	@-$(OBJCOPY) $(PATH_BIN)/stm32f446re.elf -O ihex $(PATH_BIN)/stm32f446re.hex
-	@-$(ECHO) +++ create list file $(PATH_BIN)/stm32f446re.list
-	@-$(OBJDUMP) $(PATH_BIN)/stm32f446re.elf -d > $(PATH_BIN)/stm32f446re.list
-	@-$(ECHO) +++ create symbols with readelf in $(PATH_BIN)/stm32f446re.readelf
-	@-$(READELF) $(PATH_BIN)/stm32f446re.elf -a > $(PATH_BIN)/stm32f446re.readelf
+	@-$(ECHO) +++ create HEX-file $(PATH_BIN)/stm32l432kc.hex
+	@-$(OBJCOPY) $(PATH_BIN)/stm32l432kc.elf -O ihex $(PATH_BIN)/stm32l432kc.hex
+	@-$(ECHO) +++ create list file $(PATH_BIN)/stm32l432kc.list
+	@-$(OBJDUMP) $(PATH_BIN)/stm32l432kc.elf -d > $(PATH_BIN)/stm32l432kc.list
+	@-$(ECHO) +++ create symbols with readelf in $(PATH_BIN)/stm32l432kc.readelf
+	@-$(READELF) $(PATH_BIN)/stm32l432kc.elf -a > $(PATH_BIN)/stm32l432kc.readelf
 
 #------------------------------------------------------------------------------
 # Pattern rules
@@ -195,5 +206,5 @@ $(PATH_OBJ)/%.o : %.c
 
 $(PATH_OBJ)/%.o : %.cpp
 	@-$(ECHO) +++ compile: $(subst \,/,$<) to $(subst \,/,$@)
-	@-$(CC) -x c++ -std=c++20 $(CPPFLAGS) -c $< -o $(PATH_OBJ)/$(basename $(@F)).o 2> $(PATH_OBJ)/$(basename $(@F)).err
+	@-$(CC) -x c++ -std=c++2a $(CPPFLAGS) -c $< -o $(PATH_OBJ)/$(basename $(@F)).o 2> $(PATH_OBJ)/$(basename $(@F)).err
 	@-$(SED) -e 's|.h:\([0-9]*\),|.h(\1) :|' -e 's|:\([0-9]*\):|(\1) :|' $(PATH_OBJ)/$(basename $(@F)).err

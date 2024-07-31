@@ -33,6 +33,7 @@ Global
 		Debug|x64 = Debug|x64
 		Release|x64 = Release|x64
 		stm32f446re|x64 = stm32f446re|x64
+		stm32l432kc|x64 = stm32l432kc|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.Debug|x64.ActiveCfg = Debug|x64
@@ -41,6 +42,8 @@ Global
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.Release|x64.Build.0 = Release|x64
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32f446re|x64.ActiveCfg = stm32f446re|x64
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32f446re|x64.Build.0 = stm32f446re|x64
+		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32l432kc|x64.ActiveCfg = stm32l432kc|x64
+		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32l432kc|x64.Build.0 = stm32l432kc|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
