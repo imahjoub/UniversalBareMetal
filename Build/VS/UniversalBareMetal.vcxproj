@@ -76,8 +76,8 @@
     <ClCompile Include="..\..\Src\Target\stm32l432kc\Startup\SysStartup.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Src\target\stm32f446re\make\make_stm32f446re.gmk" />
-    <None Include="..\..\Src\target\stm32f446re\make\stm32f446re.ld" />
+    <None Include="..\..\Src\Target\stm32f446re\Make\make_stm32f446re.gmk" />
+    <None Include="..\..\Src\Target\stm32f446re\Make\stm32f446re.ld" />
     <None Include="..\..\Src\Target\stm32l432kc\Make\make_stm32l432kc.gmk" />
     <None Include="..\..\Src\Target\stm32l432kc\Make\stm32l432kc.ld" />
   </ItemGroup>
