@@ -140,9 +140,11 @@ LDFLAGS        = $(CPPFLAGS)                                               \
 #------------------------------------------------------------------------------
 
 SRC_FILES      = $(PATH_SRC)/App/C/App                                     \
+                 $(PATH_SRC)/App/C/OS/OS_Task                              \
                  $(PATH_TARGET)/Mcal/Gpt                                   \
                  $(PATH_TARGET)/Mcal/Mcu                                   \
                  $(PATH_TARGET)/Mcal/SysTick                               \
+                 $(PATH_TARGET)/OS/OS                                      \
                  $(PATH_TARGET)/Startup/IntVect                            \
                  $(PATH_TARGET)/Startup/SysStartup
 
