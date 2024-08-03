@@ -59,6 +59,12 @@
     <Filter Include="Source Files\Src\Util\C">
       <UniqueIdentifier>{a45a3942-f76a-45ff-a692-7bb355eb8e53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Src\App\C\OS">
+      <UniqueIdentifier>{bd12dccf-bd29-4f88-8701-9be712fea8aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32l432kc\OS">
+      <UniqueIdentifier>{da74b66b-3426-400e-a8b0-e21cea469bcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt0.cpp">
@@ -117,6 +123,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\App\C\App.c">
       <Filter>Source Files\Src\App\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\App\C\OS\OS_Task.c">
+      <Filter>Source Files\Src\App\C\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32l432kc\OS\OS.c">
+      <Filter>Source Files\Src\Target\stm32l432kc\OS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +205,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Util\Cpp\util_time.h">
       <Filter>Source Files\Src\Util\Cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\App\C\OS\OS_Cfg.h">
+      <Filter>Source Files\Src\App\C\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32l432kc\OS\OS.h">
+      <Filter>Source Files\Src\Target\stm32l432kc\OS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

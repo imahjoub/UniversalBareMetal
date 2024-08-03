@@ -1,19 +1,9 @@
 #include <stdint.h>
 #include <Mcal/Mcu.h>
 #include <Mcal/Reg.h>
+#include <Mcal/SysTick.h>
+#include <OS/OS.h>
 #include <Util/C/UtilTimer.h>
-
-void msDelay(volatile uint32_t count);
-
-// Simple delay function
-void msDelay(volatile uint32_t count)
-{
-  while (count--)
-  {
-      __asm volatile ("nop"); // No operation (do nothing)
-  }
-}
-
 
 int main(void)
 {
@@ -21,19 +11,15 @@ int main(void)
   SystemInit();
   SetSysClock();
 
-  /*. Enable GPIO Clock for GPIOB */
-  RCC_AHB2ENR |= (1U << 1U);
+  /* Configure systick timer.*/
+  SysTick_Init();
 
-  /*. Configure PB3 as output */
-  GPIOB_MODER |= (1U << 6U);
-  GPIOB_MODER &= ~(1U << 7U);
+  /* Initialize the OS. This calls the task init-functions one time only */
+  OS_Init();
 
-  for(;;)
-  {
-    /* Toggle PB3 to turn the LED on and off */
-    GPIOB_ODR ^= (1U << 3U);
-    msDelay(1000000U);
-  }
+  /* Start the cooperative multitasking scheduler */
+  OS_Start();
 
   return 0;
+
 }
