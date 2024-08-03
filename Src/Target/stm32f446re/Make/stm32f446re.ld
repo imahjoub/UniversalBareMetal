@@ -1,9 +1,14 @@
-
 /*
- Copyright Christopher Kormanyos 2007 - 2022.
- Distributed under the Boost Software License,
- Version 1.0. (See accompanying file LICENSE_1_0.txt
- or copy at http://www.boost.org/LICENSE_1_0.txt)
+******************************************************************************
+**
+** Copyright Iliass Mahjoub 2023 - 2024.
+** Copyright Christopher Kormanyos 2007 - 2024.
+**
+** Distributed under the Boost Software License,
+** Version 1.0. (See accompanying file LICENSE_1_0.txt
+** or copy at http://www.boost.org/LICENSE_1_0.txt)
+**
+******************************************************************************
 */
 
 /* Linker script for STM32F4xx ARM(R) Cortex(TM)-M4 MCU */
