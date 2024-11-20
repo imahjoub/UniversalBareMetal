@@ -65,6 +65,21 @@
     <Filter Include="Source Files\Src\Target\stm32l432kc\OS">
       <UniqueIdentifier>{da74b66b-3426-400e-a8b0-e21cea469bcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Src\Target\tm4c123gxl">
+      <UniqueIdentifier>{5134c5ab-f425-47f1-8eb8-bc034523e01d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\tm4c123gxl\Make">
+      <UniqueIdentifier>{2f6b69a5-e243-4c69-b84c-cba61715dd27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\tm4c123gxl\Mcal">
+      <UniqueIdentifier>{d4440770-cbfe-43e7-9c83-eb45ee9d49fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\tm4c123gxl\Startup">
+      <UniqueIdentifier>{c80246d7-e040-4247-a3a7-3f51578454ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\tm4c123gxl\OS">
+      <UniqueIdentifier>{76a84d68-da22-4b40-a85c-7ca0ae4d6c81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\target\stm32f446re\startup\crt0.cpp">
@@ -124,11 +139,32 @@
     <ClCompile Include="..\..\Src\App\C\App.c">
       <Filter>Source Files\Src\App\C</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\App\C\OS\OS_Task.c">
-      <Filter>Source Files\Src\App\C\OS</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\Target\stm32l432kc\OS\OS.c">
       <Filter>Source Files\Src\Target\stm32l432kc\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\tm4c123gxl\Mcal\Gpt.c">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\tm4c123gxl\Mcal\Mcu.c">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\tm4c123gxl\Mcal\SysTick.c">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\App\C\OS\OS_Task_stm32l432kc.c">
+      <Filter>Source Files\Src\App\C\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\App\C\OS\OS_Task_tm4c123gxl.c">
+      <Filter>Source Files\Src\App\C\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\tm4c123gxl\OS\OS.c">
+      <Filter>Source Files\Src\Target\tm4c123gxl\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\tm4c123gxl\Startup\IntVect.c">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\tm4c123gxl\Startup\SysStartup.c">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Startup</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +179,12 @@
     </None>
     <None Include="..\..\Src\Target\stm32f446re\Make\stm32f446re.ld">
       <Filter>Source Files\Src\Target\stm32f446re\Make</Filter>
+    </None>
+    <None Include="..\..\Src\Target\tm4c123gxl\Make\make_tm4c123gxl.gmk">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Make</Filter>
+    </None>
+    <None Include="..\..\Src\Target\tm4c123gxl\Make\tm4c123gxl.ld">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Make</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +253,27 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\stm32l432kc\OS\OS.h">
       <Filter>Source Files\Src\Target\stm32l432kc\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\tm4c123gxl\Mcal\Gpt.h">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\tm4c123gxl\Mcal\Mcu.h">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\tm4c123gxl\Mcal\Reg.h">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\tm4c123gxl\Mcal\SysTick.h">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\tm4c123gxl\OS\OS.h">
+      <Filter>Source Files\Src\Target\tm4c123gxl\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\tm4c123gxl\Startup\hw_nvic.h">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Startup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\tm4c123gxl\Startup\hw_types.h">
+      <Filter>Source Files\Src\Target\tm4c123gxl\Startup</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

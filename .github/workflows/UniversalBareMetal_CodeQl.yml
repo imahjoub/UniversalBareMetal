@@ -16,7 +16,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze target stm32f446re
     runs-on: ubuntu-latest
     permissions:
       actions: read
