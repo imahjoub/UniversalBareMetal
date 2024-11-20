@@ -11,3 +11,8 @@ ifeq ($(TYP_MCU),stm32l432kc)
 include $(PATH_SRC)/Target/stm32l432kc/Make/make_stm32l432kc.gmk
 endif
 
+ifeq ($(TYP_MCU),tm4c123gxl)
+include $(PATH_SRC)/Target/tm4c123gxl/Make/make_tm4c123gxl.gmk
+endif
+
+

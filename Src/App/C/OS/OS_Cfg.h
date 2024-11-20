@@ -14,7 +14,7 @@
 
   #define OS_CFG_TASK_LIST_INIT \
   { \
-    OS_CFG_TASK_LIST_ENTRY(Task01_Init, Task01_Func, 0U,   17U), \
+    OS_CFG_TASK_LIST_ENTRY(Task01_Init, Task01_Func, 0U,   3U), \
   }
 
   #if defined(__cplusplus)

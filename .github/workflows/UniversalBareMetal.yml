@@ -12,7 +12,7 @@ on:
       - '**'
   pull_request:
 jobs:
-  target-ubuntu:
+  target-ubuntu-stm32f446re:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -33,7 +33,7 @@ jobs:
           make -f ../Make/make_000.gmk ${{ matrix.suite }} TYP_OS=unix TYP_MCU=stm32f446re
           ls -la ../Bin/stm32f446re_x64/stm32f446re.elf ../Bin/stm32f446re_x64/stm32f446re.hex
 
-  msvc-msbuild:
+  msvc-msbuild-stm32f446re:
     runs-on: windows-latest
     strategy:
       fail-fast: false
