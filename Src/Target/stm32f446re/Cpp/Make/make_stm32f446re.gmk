@@ -10,11 +10,11 @@
 # Paths and tools
 #------------------------------------------------------------------------------
 
-PATH_MAKE       = $(CURDIR)/../../Src/Target/stm32f446re/Make
+PATH_MAKE       = $(CURDIR)/../../Src/Target/stm32f446re/Cpp/Make
 PATH_SRC        = $(CURDIR)/../../Src
-PATH_TARGET     = $(PATH_SRC)/Target/stm32f446re
-PATH_TMP        = $(CURDIR)/../Tmp/stm32f446re_x64
-PATH_BIN        = $(CURDIR)/../Bin/stm32f446re_x64
+PATH_TARGET     = $(PATH_SRC)/Target/stm32f446re/Cpp
+PATH_TMP        = $(CURDIR)/../Tmp/stm32f446re_x64_cpp
+PATH_BIN        = $(CURDIR)/../Bin/stm32f446re_x64_cpp
 PATH_OBJ        = $(PATH_TMP)/Obj
 
 ifeq ($(TYP_OS),win)

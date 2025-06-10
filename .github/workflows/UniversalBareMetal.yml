@@ -12,7 +12,7 @@ on:
       - '**'
   pull_request:
 jobs:
-  target-ubuntu-stm32f446re:
+  target-ubuntu-stm32f446re-cpp:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -30,8 +30,8 @@ jobs:
       - name: target-ubuntu-${{ matrix.suite }}
         working-directory: ./Build/VS
         run: |
-          make -f ../Make/make_000.gmk ${{ matrix.suite }} TYP_OS=unix TYP_MCU=stm32f446re
-          ls -la ../Bin/stm32f446re_x64/stm32f446re.elf ../Bin/stm32f446re_x64/stm32f446re.hex
+          make -f ../Make/make_000.gmk ${{ matrix.suite }} TYP_OS=unix TYP_MCU=stm32f446re_cpp
+          ls -la ../Bin/stm32f446re_x64_cpp/stm32f446re.elf ../Bin/stm32f446re_x64_cpp/stm32f446re.hex
 
   msvc-msbuild-stm32f446re:
     runs-on: windows-latest
