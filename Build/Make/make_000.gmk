@@ -3,8 +3,8 @@
 PATH_ENV        = $(CURDIR)/../Make
 PATH_SRC        = $(CURDIR)/../../Src
 
-ifeq ($(TYP_MCU),stm32f446re)
-include $(PATH_SRC)/Target/stm32f446re/Make/make_stm32f446re.gmk
+ifeq ($(TYP_MCU),stm32f446re_cpp)
+include $(PATH_SRC)/Target/stm32f446re/Cpp/Make/make_stm32f446re.gmk
 endif
 
 ifeq ($(TYP_MCU),stm32l432kc)
