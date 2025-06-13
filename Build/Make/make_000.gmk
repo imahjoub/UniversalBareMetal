@@ -7,6 +7,11 @@ ifeq ($(TYP_MCU),stm32f446re_cpp)
 include $(PATH_SRC)/Target/stm32f446re/Cpp/Make/make_stm32f446re.gmk
 endif
 
+ifeq ($(TYP_MCU),stm32f446re_c)
+include $(PATH_SRC)/Target/stm32f446re/C/Make/make_stm32f446re.gmk
+endif
+
+
 ifeq ($(TYP_MCU),stm32l432kc)
 include $(PATH_SRC)/Target/stm32l432kc/Make/make_stm32l432kc.gmk
 endif

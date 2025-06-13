@@ -10,11 +10,11 @@
 # Paths and tools
 #------------------------------------------------------------------------------
 
-PATH_MAKE       = $(CURDIR)/../../Src/Target/stm32f446re/Cpp/Make
+PATH_MAKE       = $(CURDIR)/../../Src/Target/stm32f446re/C/Make
 PATH_SRC        = $(CURDIR)/../../Src
-PATH_TARGET     = $(PATH_SRC)/Target/stm32f446re/Cpp
-PATH_TMP        = $(CURDIR)/../Tmp/stm32f446re_cpp_x64
-PATH_BIN        = $(CURDIR)/../Bin/stm32f446re_cpp_x64
+PATH_TARGET     = $(PATH_SRC)/Target/stm32f446re/C
+PATH_TMP        = $(CURDIR)/../Tmp/stm32f446re_c_x64
+PATH_BIN        = $(CURDIR)/../Bin/stm32f446re_c_x64
 PATH_OBJ        = $(PATH_TMP)/Obj
 
 ifeq ($(TYP_OS),win)
@@ -124,17 +124,19 @@ LDFLAGS        = $(CPPFLAGS)                                               \
 # Source files
 #------------------------------------------------------------------------------
 
-SRC_FILES      = $(PATH_SRC)/App/Cpp/App                                   \
-                 $(PATH_TARGET)/Mcal/mcal                                  \
-                 $(PATH_TARGET)/Mcal/mcal_cpu                              \
-                 $(PATH_TARGET)/Mcal/mcal_gpt                              \
-                 $(PATH_TARGET)/Mcal/mcal_osc                              \
-                 $(PATH_TARGET)/Mcal/mcal_osc_detail                       \
-                 $(PATH_TARGET)/Startup/crt0                               \
-                 $(PATH_TARGET)/Startup/crt0_init_ram                      \
-                 $(PATH_TARGET)/Startup/crt1                               \
-                 $(PATH_TARGET)/Startup/int_vect                           \
-                 $(PATH_TARGET)/Startup/mcal_gcc_cxx_completion
+SRC_FILES      = $(PATH_TARGET)/App/App                                    \
+                 $(PATH_SRC)/App/C/OS/OS_Task_stm32f446re                  \
+                 $(PATH_TARGET)/Cdd/CddAdc/CddAdc                          \
+                 $(PATH_TARGET)/Cdd/CddIWdg/CddIWdg                        \
+                 $(PATH_TARGET)/Cdd/CddTim/CddTim                          \
+                 $(PATH_TARGET)/Cdd/CddWwdg/CddWwdg                        \
+                 $(PATH_TARGET)/Mcal/Gpt                                   \
+                 $(PATH_TARGET)/Mcal/Gpio                                  \
+                 $(PATH_TARGET)/Mcal/Mcu                                   \
+                 $(PATH_TARGET)/Mcal/SysTick                               \
+                 $(PATH_TARGET)/OS/OS                                      \
+                 $(PATH_TARGET)/Startup/IntVect                            \
+                 $(PATH_TARGET)/Startup/SysStartup
 
 
 #------------------------------------------------------------------------------
@@ -196,3 +198,4 @@ $(PATH_OBJ)/%.o : %.cpp
 	@-$(ECHO) +++ compile: $(subst \,/,$<) to $(subst \,/,$@)
 	@-$(CC) -x c++ -std=c++20 $(CPPFLAGS) -c $< -o $(PATH_OBJ)/$(basename $(@F)).o 2> $(PATH_OBJ)/$(basename $(@F)).err
 	@-$(SED) -e 's|.h:\([0-9]*\),|.h(\1) :|' -e 's|:\([0-9]*\):|(\1) :|' $(PATH_OBJ)/$(basename $(@F)).err
+
