@@ -86,6 +86,36 @@
     <Filter Include="Source Files\Src\Target\stm32f446re\Cpp\Startup">
       <UniqueIdentifier>{09a60374-ec83-484c-bd6a-9d3311a775d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Mcal">
+      <UniqueIdentifier>{e75334ed-4d85-42dc-8b59-e43227d477aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Startup">
+      <UniqueIdentifier>{24a74001-40dc-453e-ab2a-131af1872897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Make">
+      <UniqueIdentifier>{f6d8de7f-7cad-45d4-8149-e7dd900e7129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd">
+      <UniqueIdentifier>{c4548049-d4d3-423d-a42c-7c0c90847b78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddAdc">
+      <UniqueIdentifier>{90406bc3-fe11-4f64-a38a-cdb675daab7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddIwdg">
+      <UniqueIdentifier>{df65b982-bbf2-4a11-be60-99a9481d67c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\OS">
+      <UniqueIdentifier>{a5970877-7098-494e-a479-b54e8c1db44a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\App">
+      <UniqueIdentifier>{8d6869fc-7787-441c-8db5-004a69ad7fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddWwdg">
+      <UniqueIdentifier>{e45f3a86-81b1-4576-ad69-d7cf0acb0012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddTim">
+      <UniqueIdentifier>{b04e2dc0-1769-485d-aa92-4e2e9d4ed0da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Target\Host\Mcal\mcal_gpt.cpp">
@@ -172,6 +202,45 @@
     <ClCompile Include="..\..\Src\Target\stm32f446re\Cpp\Mcal\mcal_osc_detail.cpp">
       <Filter>Source Files\Src\Target\stm32f446re\Cpp\Mcal</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddAdc\CddAdc.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddAdc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddIWdg\CddIWdg.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddIwdg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Mcal\Gpio.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Mcal\Mcu.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\StartUp\IntVect.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\StartUp\SysStartup.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\OS\OS.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Mcal\Gpt.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Mcal\SysTick.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\App\C\OS\OS_Task_stm32f446re.c">
+      <Filter>Source Files\Src\App\C\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\App\App.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddTim\CddTim.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddTim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddWwdg\CddWwdg.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddWwdg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Src\Target\stm32l432kc\Make\make_stm32l432kc.gmk">
@@ -191,6 +260,12 @@
     </None>
     <None Include="..\..\Src\Target\stm32f446re\Cpp\Make\stm32f446re.ld">
       <Filter>Source Files\Src\Target\stm32f446re\Cpp\Make</Filter>
+    </None>
+    <None Include="..\..\Src\Target\stm32f446re\C\Make\make_stm32f446re.gmk">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Make</Filter>
+    </None>
+    <None Include="..\..\Src\Target\stm32f446re\C\Make\stm32f446re.ld">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Make</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +355,36 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\stm32f446re\Cpp\Mcal\mcal_reg_access_static.h">
       <Filter>Source Files\Src\Target\stm32f446re\Cpp\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddAdc\CddAdc.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddAdc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddIWdg\CddIWdg.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddIwdg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Mcal\Gpio.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Mcal\Mcu.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Mcal\Reg.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\OS\OS.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Mcal\Gpt.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Mcal\SysTick.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Mcal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddTim\CddTim.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddTim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddWwdg\CddWwdg.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddWwdg</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -32,6 +32,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Release|x64 = Release|x64
+		stm32f446re_c|x64 = stm32f446re_c|x64
 		stm32f446re_cpp|x64 = stm32f446re_cpp|x64
 		stm32l432kc|x64 = stm32l432kc|x64
 		tm4c123gxl|x64 = tm4c123gxl|x64
@@ -41,6 +42,8 @@ Global
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.Debug|x64.Build.0 = Debug|x64
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.Release|x64.ActiveCfg = Release|x64
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.Release|x64.Build.0 = Release|x64
+		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32f446re_c|x64.ActiveCfg = stm32f446re_c|x64
+		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32f446re_c|x64.Build.0 = stm32f446re_c|x64
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32f446re_cpp|x64.ActiveCfg = stm32f446re_cpp|x64
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32f446re_cpp|x64.Build.0 = stm32f446re_cpp|x64
 		{32D529D9-6963-472C-9BB3-1E4E1933FC56}.stm32l432kc|x64.ActiveCfg = stm32l432kc|x64
