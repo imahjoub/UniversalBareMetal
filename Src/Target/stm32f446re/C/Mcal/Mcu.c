@@ -14,10 +14,10 @@ void SystemInit(void)
   SCB_CPACR |= (uint32_t)((uint32_t)(3UL << 20U) | (uint32_t)(3UL << 22U));
 
   /* Set HSION (internal high-speed clock) enable bit */
-  RCC_CR |= (uint32_t)(1UL << 0);
+  RCC_CR |= (uint32_t)(1UL << 0U);
 
   /* Reset HSEON, CSSON, HSEBYP and PLLON bits */
-  RCC_CR &= (uint32_t)((~(1UL << 16)) | (~(1UL << 18))) | (~(1UL << 19)) | (~(1UL << 24));
+  RCC_CR &= (uint32_t)((~(1UL << 16U)) | (~(1UL << 18U))) | (~(1UL << 19U)) | (~(1UL << 24U));
 
   /* Reset CFGR register */
   RCC_CFGR = (uint32_t)0x00000000UL;
@@ -29,51 +29,51 @@ void SystemInit(void)
   RCC_CIR = (uint32_t)0x00000000UL;
 
   /* Configure Flash prefetch, Instruction cache, Data cache and wait state (5 wait states) */
-  FLASH_ACR = (uint32_t)((1UL << 9) | (1UL << 10) | (5UL << 0));
+  FLASH_ACR = (uint32_t)((1UL << 9U) | (1UL << 10U) | (5UL << 0U));
 }
 
 void SetSysClock(void)
 {
   /* Enable HSE */
-  RCC_CR |= ((uint32_t)(1UL << 16));
+  RCC_CR |= ((uint32_t)(1UL << 16U));
 
   /* Wait till HSE is ready */
-  while(!(RCC_CR & ((uint32_t)1UL << 17)))
+  while(!(RCC_CR & ((uint32_t)1UL << 17U)))
   {
     __asm volatile("nop");
   }
 
   /* PWREN: Power interface clock enable */
-  RCC_APB1ENR |= (uint32_t)(1UL << 28);
+  RCC_APB1ENR |= (uint32_t)(1UL << 28U);
 
   /* Set HCLK  = sysclk / 1 */
   /* Set PCLK2 = hclk   / 2 */
-  /* Set PCLK1 = hclk   / 4 */
-  RCC_CFGR |= (uint32_t)((5UL << 10) | (1UL << 15));
+  /* Set PCLK1 = hclk   / 4 */     // for WWDG  set --> (7UL << 10U)  for hclk / 16
+  RCC_CFGR |= (uint32_t)((5UL << 10U) | (1UL << 15U));
 
   /* Configure the main PLL */
-  /* PLL_M = 8        */
-  /* PLL_N = 360      */
-  /* PLL_P = 0 -> 2   */
-  /* PLL_Q = 7        */
-  /* SYSCLK = 180 MHz */
-  RCC_PLLCFGR = (uint32_t)(8UL << 0) | (360UL << 6) | (0UL << 16) | (1UL << 22) | (7UL << 24);
+  /* PLL_M = 8              */
+  /* PLL_N = 360            */
+  /* PLL_P = 0 -> 2         */
+  /* PLL_Q = 7              */
+  /* SYSCLK = 180 MHz       */
+  RCC_PLLCFGR = (uint32_t)(8UL << 0U) | (360UL << 6U) | (0UL << 16U) | (1UL << 22U) | (7UL << 24U);
 
   /* Enable the main PLL */
-  RCC_CR |= (uint32_t)(1UL << 24);
+  RCC_CR |= (uint32_t)(1UL << 24U);
 
   /* Wait till the main PLL is ready */
-  while(!(RCC_CR & (uint32_t)(1UL << 25)))
+  while(!(RCC_CR & (uint32_t)(1UL << 25U)))
   {
     __asm volatile("nop");
   }
 
   /* Select the main PLL as system clock source */
-  RCC_CFGR &= (uint32_t)(~(3UL << 0));
-  RCC_CFGR |= (uint32_t)(2UL << 0);
+  RCC_CFGR &= (uint32_t)(~(3UL << 0U));
+  RCC_CFGR |= (uint32_t)(2UL << 0U);
 
   /* Wait till the main PLL is used as system clock source */
-  while ((RCC_CFGR & (uint32_t)(0x0CU << 0)) != (8UL << 0))
+  while ((RCC_CFGR & (uint32_t)(0x0CU << 0U)) != (8UL << 0U))
   {
   }
 }

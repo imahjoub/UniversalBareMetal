@@ -2,8 +2,8 @@
 
 #include <Cdd/CddAdc/CddAdc.h>
 #include <Cdd/CddIWdg/CddIWdg.h>
-#include <Cdd/CddTim/CddTim.h>
 #include <Cdd/CddWWdg/CddWWdg.h>
+#include <Cdd/CddTim/CddTim.h>
 #include <Mcal/Gpio.h>
 #include <Mcal/Gpt.h>
 #include <Mcal/Mcu.h>
@@ -20,6 +20,8 @@ void EXTI15_10_IRQHandler(void);
 void IWDG_Task           (void);
 void WWDG_Task           (void);
 void Pwm_Task            (void);
+void msDelay             (uint32_t ms);
+
 
 int main(void)
 {
@@ -37,7 +39,8 @@ int main(void)
   EXTI_Init();
 
   /* Run a Task */
-  Blinky_Task();
+  //Blinky_Task();
+  Pwm_Task();
 
 }
 
@@ -45,6 +48,7 @@ int main(void)
 /*                                TASKS                                */
 /***********************************************************************/
 
+/* --- Pwm Task --- */
 void Pwm_Task(void)
 {
   /* Initialize TIM2 */
@@ -52,30 +56,26 @@ void Pwm_Task(void)
 
   while(1)
   {
-    for(uint8_t i = 0; i < 250U; ++i)
+    /* Gradually increase brightness from 0 to 100% */
+    for(uint32_t DutyCycle = 0U; DutyCycle < 500U; ++DutyCycle)
     {
-      CddTim_SetPwmDutyCycle(1U, i);
-      CddTim_SetPwmDutyCycle(2U, 250U - i);
+      CddTim_SetPwmDutyCycle(1U, DutyCycle);
+      CddTim_SetPwmDutyCycle(2U, (500U - DutyCycle));
 
-      for (volatile uint32_t idx = 0; idx < (uint32_t)0x00FFFFFFUL; ++idx)
-      {
-      }
-
+      /* Add a small delay to create a visible transition */
+      msDelay(30U);
     }
 
-    for(uint8_t i = 0; i < 250U; ++i)
+    for(uint32_t DutyCycle = 500U; DutyCycle > 0U; --DutyCycle)
     {
-      CddTim_SetPwmDutyCycle(1, 250 - i);
-      CddTim_SetPwmDutyCycle(2, i);
+      CddTim_SetPwmDutyCycle(1U, DutyCycle);
+      CddTim_SetPwmDutyCycle(2U, (500U - DutyCycle));
 
-      for (volatile uint32_t idy = 0; idy < (uint32_t)0x00FFFFFFUL; ++idy)
-      {
-      }
-
+      /* Add a small delay to create a visible transition */
+      msDelay(30U);
     }
   }
 }
-
 
 /* --- Blinky Task --- */
 void Blinky_Task(void)
@@ -90,7 +90,6 @@ void Blinky_Task(void)
       Led_Blinky();
     }
   }
-
 }
 
 /* --- IWDG Task --- */
@@ -146,7 +145,6 @@ void WWDG_Task(void)
       WWDG_CR |= (uint32_t)(0x7FUL << 0U);
     }
   }
-
 }
 
 /* --- ADC Task --- */
@@ -173,6 +171,16 @@ void EXTI15_10_IRQHandler(void)
 
     /* Toggle the button pressed state */
     UserButtonIsPressed = (uint8_t)(!UserButtonIsPressed);
+  }
+}
+
+/* --- Simple ms Delay --- */
+void msDelay(uint32_t ms)
+{
+  // Simple delay loop - adjust based on your system clock
+  for (uint32_t i = 0; i < ms * 1000; i++)
+  {
+    __asm("NOP");
   }
 }
 
