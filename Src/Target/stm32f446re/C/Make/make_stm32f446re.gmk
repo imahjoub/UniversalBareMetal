@@ -124,18 +124,19 @@ LDFLAGS        = $(CPPFLAGS)                                               \
 # Source files
 #------------------------------------------------------------------------------
 
-SRC_FILES      = $(PATH_TARGET)/App/App                                    \
-                 $(PATH_SRC)/App/C/OS/OS_Task_stm32f446re                  \
-                 $(PATH_TARGET)/Cdd/CddAdc/CddAdc                          \
-                 $(PATH_TARGET)/Cdd/CddIWdg/CddIWdg                        \
-                 $(PATH_TARGET)/Cdd/CddTim/CddTim                          \
-                 $(PATH_TARGET)/Cdd/CddWwdg/CddWwdg                        \
-                 $(PATH_TARGET)/Mcal/Gpt                                   \
-                 $(PATH_TARGET)/Mcal/Gpio                                  \
-                 $(PATH_TARGET)/Mcal/Mcu                                   \
-                 $(PATH_TARGET)/Mcal/SysTick                               \
-                 $(PATH_TARGET)/OS/OS                                      \
-                 $(PATH_TARGET)/Startup/IntVect                            \
+SRC_FILES      = $(PATH_TARGET)/App/App                                           \
+                 $(PATH_SRC)/App/C/OS/OS_Task_stm32f446re                         \
+                 $(PATH_TARGET)/Cdd/CddAdc/CddAdc                                 \
+                 $(PATH_TARGET)/Cdd/CddIWdg/CddIWdg                               \
+                 $(PATH_TARGET)/Cdd/CddStandbyModeManager/CddStandbyModeManager   \
+                 $(PATH_TARGET)/Cdd/CddTim/CddTim                                 \
+                 $(PATH_TARGET)/Cdd/CddWwdg/CddWwdg                               \
+                 $(PATH_TARGET)/Mcal/Gpt                                          \
+                 $(PATH_TARGET)/Mcal/Gpio                                         \
+                 $(PATH_TARGET)/Mcal/Mcu                                          \
+                 $(PATH_TARGET)/Mcal/SysTick                                      \
+                 $(PATH_TARGET)/OS/OS                                             \
+                 $(PATH_TARGET)/Startup/IntVect                                   \
                  $(PATH_TARGET)/Startup/SysStartup
 
 

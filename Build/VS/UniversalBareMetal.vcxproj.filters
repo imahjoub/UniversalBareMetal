@@ -116,6 +116,9 @@
     <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddTim">
       <UniqueIdentifier>{b04e2dc0-1769-485d-aa92-4e2e9d4ed0da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager">
+      <UniqueIdentifier>{5bb86238-34c0-4c40-89e6-17fae0f24ae2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Target\Host\Mcal\mcal_gpt.cpp">
@@ -240,6 +243,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddWwdg\CddWwdg.c">
       <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddWwdg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager\CddStandbyModeManager.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddWwdg\CddWwdg.h">
       <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddWwdg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager\CddStandbyModeManager.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

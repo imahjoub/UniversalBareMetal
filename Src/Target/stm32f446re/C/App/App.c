@@ -54,8 +54,9 @@ void Pwm_Task(void)
   /* Initialize TIM2 */
   CddTim_Init();
 
-  while(1)
+  while(1U)
   {
+  #ifndef PWM_WITH_DMA
     /* Gradually increase brightness from 0 to 100% */
     for(uint32_t DutyCycle = 0U; DutyCycle < 500U; ++DutyCycle)
     {
@@ -74,6 +75,7 @@ void Pwm_Task(void)
       /* Add a small delay to create a visible transition */
       msDelay(30U);
     }
+  #endif /* PWM_WITH_DMA */
   }
 }
 
