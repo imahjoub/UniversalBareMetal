@@ -122,8 +122,7 @@ void CddTim_Init(void)
   /* Set timer Prescaler                            */
   /* Prescale to 100kHz (45MHz / 4500)              */
   //TIM2_PSC = 45000UL - 1UL; /* for 4Hz */
-  //TIM2_PSC = 180UL - 1UL; //for normal pwm with ramp up
-  TIM2_PSC = 2000UL - 1UL; // DMA
+  TIM2_PSC = 180UL - 1UL; //for normal pwm with ramp up
 
   /* Set Auto-reload value                          */
   TIM2_ARR = 500UL - 1UL;
