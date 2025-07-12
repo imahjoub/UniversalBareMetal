@@ -3,7 +3,7 @@
 
   #include <Mcal/Mcu.h>
 
-  //#define PWM_WITH_DMA
+  #define PWM_WITH_DMA
 
   void CddTim_Init(void);
   void CddTim_SetPwmDutyCycle(uint8_t PWMChannel, uint32_t DutyCycle);
