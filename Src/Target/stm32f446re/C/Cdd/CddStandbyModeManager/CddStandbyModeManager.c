@@ -4,10 +4,10 @@
 #define PWR_CSR_WUF    (uint32_t)(1UL << 0U)
 #define PWR_CSR_SBF    (uint32_t)(1UL << 1U)
 
-void CddSSM_StandbyWakeupPinSetup(void)
+void CddSBM_StandbyWakeupPinSetup(void)
 {
   /* Wait for Wakeup pin to be released                 */
-  while(CddSSM_GetWakeUpStatePin() == 0U);
+  while(CddSBM_GetWakeUpStatePin() == 0U);
 
   /* Disable wakeup pin                                 */
   PWR_CSR &= (uint32_t)(~(1UL << 8U));
@@ -30,13 +30,13 @@ void CddSSM_StandbyWakeupPinSetup(void)
 }
 
 
-uint32_t CddSSM_GetWakeUpStatePin(void)
+uint32_t CddSBM_GetWakeUpStatePin(void)
 {
   return ((GPIOC_IDR & WAKEUP_PIN) == WAKEUP_PIN);
 }
 
 
-void CddSSM_HandleReset(void)
+void CddSBM_HandleReset(void)
 {
    /* Power interface clock enable PWR */
    RCC_APB1ENR |= (uint32_t)(1UL << 28U);
@@ -51,7 +51,7 @@ void CddSSM_HandleReset(void)
     Led_Blinky();
 
     /* Wait for wake up pin to be released */
-    while(CddSSM_GetWakeUpStatePin() == 0U) { /* Do nothing */ }
+    while(CddSBM_GetWakeUpStatePin() == 0U) { /* Do nothing */ }
   }
 
   /* Check and clear the WakeUp flag */

@@ -5,9 +5,9 @@
   #include "Mcal/Mcu.h"
 
 
-  void     CddSSM_HandleReset(void);
-  void     CddSSM_StandbyWakeupPinSetup(void);
-  uint32_t CddSSM_GetWakeUpStatePin(void);
+  void     CddSBM_HandleReset(void);
+  void     CddSBM_StandbyWakeupPinSetup(void);
+  uint32_t CddSBM_GetWakeUpStatePin(void);
 
 #endif /* CDD_STAND_BY_MODE_MANAGER_2025_07_10_H */
 

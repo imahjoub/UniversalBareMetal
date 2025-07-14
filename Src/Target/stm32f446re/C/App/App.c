@@ -2,6 +2,7 @@
 
 #include <Cdd/CddAdc/CddAdc.h>
 #include <Cdd/CddIWdg/CddIWdg.h>
+#include <Cdd/CddStandbyModeManager/CddStandbyModeManager.h>
 #include <Cdd/CddWWdg/CddWWdg.h>
 #include <Cdd/CddTim/CddTim.h>
 #include <Mcal/Gpio.h>
@@ -39,8 +40,7 @@ int main(void)
   EXTI_Init();
 
   /* Run a Task */
-  //Blinky_Task();
-  Pwm_Task();
+  Blinky_Task();
 
 }
 
@@ -172,7 +172,8 @@ void EXTI15_10_IRQHandler(void)
     EXTI_PR |= (1UL << USER_BUTTON);
 
     /* Toggle the button pressed state */
-    UserButtonIsPressed = (uint8_t)(!UserButtonIsPressed);
+    //UserButtonIsPressed = (uint8_t)(!UserButtonIsPressed);
+      CddSBM_StandbyWakeupPinSetup();
   }
 }
 

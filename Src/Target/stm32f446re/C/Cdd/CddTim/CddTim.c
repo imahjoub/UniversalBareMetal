@@ -110,9 +110,10 @@ uint16_t TIM2_CH2_LookUp_Table[NumberOfDataItemsToTransfer] =
     9U,   8U,   7U,   6U,   5U,   4U,   3U,   2U,   1U,   0U
 };
 
+#ifdef PWM_WITH_DMA
 static void CddTim_ConfigureDMA1Stream5(void);
 static void CddTim_ConfigureDMA1Stream6(void);
-
+#endif
 
 void CddTim_Init(void)
 {
@@ -169,7 +170,7 @@ void CddTim_Init(void)
   TIM2_EGR |= (uint32_t)1UL;
 }
 
-
+#ifdef PWM_WITH_DMA
 static void CddTim_ConfigureDMA1Stream5(void)
 {
   /* DMA1 clock enable */
@@ -214,7 +215,6 @@ static void CddTim_ConfigureDMA1Stream5(void)
    /* Enable DMA1 Stream5 */
    DMA1_STREAM5_CR |= (uint32_t)( 1UL << 0U);
 }
-
 
 static void CddTim_ConfigureDMA1Stream6(void)
 {
@@ -263,7 +263,7 @@ static void CddTim_ConfigureDMA1Stream6(void)
    /* Enable DMA1 Stream6 */
    DMA1_STREAM6_CR |= (uint32_t)( 1UL << 0U);
 }
-
+#endif
 
 
 void CddTim_SetPwmDutyCycle(uint8_t PwmChannel, uint32_t DutyCycle)
