@@ -2,6 +2,7 @@
 
 #include <Cdd/CddAdc/CddAdc.h>
 #include <Cdd/CddIWdg/CddIWdg.h>
+#include <Cdd/CddStandbyModeManager/CddStandbyModeManager.h>
 #include <Cdd/CddWWdg/CddWWdg.h>
 #include <Cdd/CddTim/CddTim.h>
 #include <Mcal/Gpio.h>
@@ -39,8 +40,7 @@ int main(void)
   EXTI_Init();
 
   /* Run a Task */
-  //Blinky_Task();
-  Pwm_Task();
+  Blinky_Task();
 
 }
 
@@ -54,8 +54,9 @@ void Pwm_Task(void)
   /* Initialize TIM2 */
   CddTim_Init();
 
-  while(1)
+  while(1U)
   {
+  #ifndef PWM_WITH_DMA
     /* Gradually increase brightness from 0 to 100% */
     for(uint32_t DutyCycle = 0U; DutyCycle < 500U; ++DutyCycle)
     {
@@ -74,6 +75,7 @@ void Pwm_Task(void)
       /* Add a small delay to create a visible transition */
       msDelay(30U);
     }
+  #endif /* PWM_WITH_DMA */
   }
 }
 
@@ -170,7 +172,8 @@ void EXTI15_10_IRQHandler(void)
     EXTI_PR |= (1UL << USER_BUTTON);
 
     /* Toggle the button pressed state */
-    UserButtonIsPressed = (uint8_t)(!UserButtonIsPressed);
+    //UserButtonIsPressed = (uint8_t)(!UserButtonIsPressed);
+      CddSBM_StandbyWakeupPinSetup();
   }
 }
 

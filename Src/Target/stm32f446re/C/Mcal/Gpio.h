@@ -7,6 +7,7 @@
   #define RCC_AHB1ENR_GPIOCEN  (1UL << 2U)
 
   #define USER_LED               5UL
+  #define WAKEUP_PIN             (1UL << 3U)
   #define USER_BUTTON           13UL
 
   void Led_On(void);

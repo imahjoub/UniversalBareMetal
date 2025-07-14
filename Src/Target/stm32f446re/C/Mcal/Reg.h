@@ -4,21 +4,22 @@
   #include <stdint.h>
 
   /* Base addresses for peripheral registers */
-  #define SCB_BASE              0xE000ED00UL
-  #define STK_BASE              0xE000E010UL
-  #define RCC_BASE              0x40023800UL
-  #define PWR_BASE              0x40007000UL
   #define ADC1_BASE             0x40012000UL
-  #define FLASH_BASE            0x40023C00UL
+  #define DMA1_BASE             0x40026000UL
+  #define EXTI_BASE             0x40013C00UL
   #define GPIOA_BASE            0x40020000UL
   #define GPIOC_BASE            0x40020800UL
-  #define SPI_BASE              0x40013000UL
+  #define FLASH_BASE            0x40023C00UL
   #define IWDG_BASE             0x40003000UL
-  #define WWDG_BASE             0x40002C00UL
-  #define EXTI_BASE             0x40013C00UL
+  #define SPI_BASE              0x40013000UL
   #define SYSCFG_BASE           0x40013800UL
+  #define PWR_BASE              0x40007000UL
+  #define RCC_BASE              0x40023800UL
   #define NVIC_ISER_BASE        0xE000E100UL
+  #define SCB_BASE              0xE000ED00UL
+  #define STK_BASE              0xE000E010UL
   #define TIM2_BASE             0x40000000UL
+  #define WWDG_BASE             0x40002C00UL
 
 
   /* ADC1 registers */
@@ -50,6 +51,7 @@
 
   /* SCB registers */
   #define SCB_CPACR            (*(volatile uint32_t*)(SCB_BASE + 0x88UL))
+  #define SCB_SCR              (*(volatile uint32_t*)(SCB_BASE + 0x10UL))
 
   /* SysTick registers */
   #define STK_CTRL             (*(volatile uint32_t*)(STK_BASE + 0x00UL))
@@ -68,7 +70,7 @@
 
   /* PWR registers */
   #define PWR_CR               (*(volatile uint32_t*)(PWR_BASE + 0x00UL))
-  #define PWR_CR               (*(volatile uint32_t*)(PWR_BASE + 0x00UL))
+  #define PWR_CSR              (*(volatile uint32_t*)(PWR_BASE + 0x04UL))
 
   /* FLASH registers */
   #define FLASH_ACR            (*(volatile uint32_t*)(FLASH_BASE + 0x00UL))
@@ -108,6 +110,21 @@
   #define TIM2_ARR             (*(volatile uint32_t*)(TIM2_BASE + 0x2CUL))
   #define TIM2_CCR1            (*(volatile uint32_t*)(TIM2_BASE + 0x34UL))
   #define TIM2_CCR2            (*(volatile uint32_t*)(TIM2_BASE + 0x38UL))
+
+  /* DMA1 registers */
+  #define DMA1_LISR            (*(volatile uint32_t*)(DMA1_BASE + 0x00UL))
+  #define DMA1_HISR            (*(volatile uint32_t*)(DMA1_BASE + 0x04UL))
+  #define DMA1_LIFCR           (*(volatile uint32_t*)(DMA1_BASE + 0x08UL))
+  #define DMA1_HIFCR           (*(volatile uint32_t*)(DMA1_BASE + 0x0CUL))
+  #define DMA1_STREAM5_CR      (*(volatile uint32_t*)(DMA1_BASE + 0x88UL))
+  #define DMA1_STREAM5_NDTR    (*(volatile uint32_t*)(DMA1_BASE + 0x8CUL))
+  #define DMA1_STREAM5_PAR     (*(volatile uint32_t*)(DMA1_BASE + 0x90UL))
+  #define DMA1_STREAM5_M0AR    (*(volatile uint32_t*)(DMA1_BASE + 0x9CUL))
+  #define DMA1_STREAM6_CR      (*(volatile uint32_t*)(DMA1_BASE + 0xA0UL))
+  #define DMA1_STREAM6_NDTR    (*(volatile uint32_t*)(DMA1_BASE + 0xA4UL))
+  #define DMA1_STREAM6_PAR     (*(volatile uint32_t*)(DMA1_BASE + 0xA8UL))
+  #define DMA1_STREAM6_M0AR    (*(volatile uint32_t*)(DMA1_BASE + 0xB4UL))
+
 
 
 #endif /* REG_2025_06_12_H */

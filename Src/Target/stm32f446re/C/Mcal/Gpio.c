@@ -16,12 +16,11 @@ void GPIO_Init(void)
   GPIOC_PUPDR |= (1UL << (USER_BUTTON * 2U + 1U));
   GPIOC_PUPDR &= (uint32_t)(~(1UL << (USER_BUTTON * 2U)));
 
-  /* Configure USER_BUTTON PC3 as input */
-  //GPIOC_MODER &= (uint32_t)(~((1UL << (WAKEUP_PIN * 2U)) | (1UL << (WAKEUP_PIN * 2U + 1U))));
+  /* Configure PC3 as input */
+  GPIOC_MODER &= (uint32_t)(~((1UL << (WAKEUP_PIN * 2U)) | (1UL << (WAKEUP_PIN * 2U + 1U))));
   /* Set USER_BUTTON PC13 no pull */
-  //GPIOC_PUPDR &= (uint32_t)(~(1UL << (WAKEUP_PIN * (2U + 1U))));
-  //GPIOC_PUPDR &= (uint32_t)(~(1UL << (WAKEUP_PIN * (2U + 0U))));
-
+  GPIOC_PUPDR &= (uint32_t)(~(1UL << (WAKEUP_PIN * (2U + 1U))));
+  GPIOC_PUPDR &= (uint32_t)(~(1UL << (WAKEUP_PIN * (2U + 0U))));
 
   /* configure the PA0 to  for TIM2_CH1 */
   GPIOA_MODER &= (uint32_t)(~(1UL << 0U));
