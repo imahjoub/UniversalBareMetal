@@ -36,7 +36,7 @@ void CddRTC_Init(void)
   RTC_WPR = 0x53U;
 
   /* Enter the Initialization mode           */
-  CddRTC_EnterInitMode();
+  while(CddRTC_EnterInitMode()) { };
 
   /*              Set desired date                 */
   /* Set Date to 2025-07-15, Tuesday (weekday = 2) */
@@ -69,7 +69,7 @@ static uint8_t CddRTC_EnterInitMode(void)
   RTC_ISR |= (1U << 7UL);
 
   /* Check Initialization flag */
-  while ((RTC_ISR & (1UL << 6U)) == 0U);
+  return ((RTC_ISR & (1UL << 6U)) == 0U);
 }
 
 
@@ -124,3 +124,19 @@ void CddRTC_ReadDate(uint8_t* Year, uint8_t* Month, uint8_t* Date, uint8_t* Week
 }
 
 
+void CddRTC_AlarmInit(void)
+{
+  /* Disable RTC registers write protection */
+  /* Enter the initialization mode          */
+  /* Set desired Date                       */
+  /* Set desired Time                       */
+  /* Set Alarm                              */
+  /* Ignore Weekday                         */
+  /* Enable Alarm                           */
+  /* Enable Alarm  Interrupt                */
+  /* Configure RTC Alarm interrupt          */
+  /* Enable Alarm Interrupt in NVIC         */
+  /* Exit the initialization mode            */
+  /* Enable the RTC regs write protection    */
+
+}
