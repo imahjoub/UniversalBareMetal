@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-#  Copyright Iliass Mahjoub 2023 - 2024.
+#  Copyright Iliass Mahjoub 2023 - 2025.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
 #  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -129,6 +129,7 @@ SRC_FILES      = $(PATH_TARGET)/App/App                                         
                  $(PATH_TARGET)/Cdd/CddAdc/CddAdc                                 \
                  $(PATH_TARGET)/Cdd/CddIWdg/CddIWdg                               \
                  $(PATH_TARGET)/Cdd/CddStandbyModeManager/CddStandbyModeManager   \
+                 $(PATH_TARGET)/Cdd/CddRTC/CddRTC                                 \
                  $(PATH_TARGET)/Cdd/CddTim/CddTim                                 \
                  $(PATH_TARGET)/Cdd/CddWwdg/CddWwdg                               \
                  $(PATH_TARGET)/Mcal/Gpt                                          \

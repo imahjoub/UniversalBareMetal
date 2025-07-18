@@ -4,6 +4,7 @@
 #include <Cdd/CddIWdg/CddIWdg.h>
 #include <Cdd/CddStandbyModeManager/CddStandbyModeManager.h>
 #include <Cdd/CddWWdg/CddWWdg.h>
+#include <Cdd/CddRTC/CddRTC.h>
 #include <Cdd/CddTim/CddTim.h>
 #include <Mcal/Gpio.h>
 #include <Mcal/Gpt.h>
@@ -20,6 +21,7 @@ void Blinky_Task         (void);
 void EXTI15_10_IRQHandler(void);
 void IWDG_Task           (void);
 void WWDG_Task           (void);
+void RTC_Task            (void);
 void Pwm_Task            (void);
 void msDelay             (uint32_t ms);
 
@@ -40,13 +42,31 @@ int main(void)
   EXTI_Init();
 
   /* Run a Task */
-  Blinky_Task();
+  //Blinky_Task();
+  RTC_Task();
 
 }
 
 /***********************************************************************/
 /*                                TASKS                                */
 /***********************************************************************/
+/* --- RTC Task --- */
+
+uint8_t DateBuffer[5U];
+uint8_t TimeBuffer[5U];
+
+void RTC_Task(void)
+{
+  CddRTC_Init();
+
+  while(1U)
+  {
+    CddRTC_ReadDate(&DateBuffer[0U], &DateBuffer[1U],&DateBuffer[2U],&DateBuffer[3U]);
+    CddRTC_ReadTime(&TimeBuffer[0U], &TimeBuffer[1U],&TimeBuffer[2U],&TimeBuffer[3U]);
+  }
+}
+
+
 
 /* --- Pwm Task --- */
 void Pwm_Task(void)
@@ -173,7 +193,7 @@ void EXTI15_10_IRQHandler(void)
 
     /* Toggle the button pressed state */
     //UserButtonIsPressed = (uint8_t)(!UserButtonIsPressed);
-      CddSBM_StandbyWakeupPinSetup();
+    //CddSBM_StandbyWakeupPinSetup();
   }
 }
 

@@ -51,6 +51,10 @@ void SetSysClock(void)
   /* Set PCLK1 = hclk   / 4 */     // for WWDG  set --> (7UL << 10U)  for hclk / 16
   RCC_CFGR |= (uint32_t)((5UL << 10U) | (1UL << 15U));
 
+  /* HSE division factor for RTC clock */
+  /* Devide by 16 to get 1 MHz for RTC */
+  RCC_CFGR |= (uint32_t)(1UL << 20U);
+
   /* Configure the main PLL */
   /* PLL_M = 8              */
   /* PLL_N = 360            */
