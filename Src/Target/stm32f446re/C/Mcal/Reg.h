@@ -15,6 +15,7 @@
   #define SYSCFG_BASE           0x40013800UL
   #define PWR_BASE              0x40007000UL
   #define RCC_BASE              0x40023800UL
+  #define RTC_BASE              0x40002800UL
   #define NVIC_ISER_BASE        0xE000E100UL
   #define SCB_BASE              0xE000ED00UL
   #define STK_BASE              0xE000E010UL
@@ -33,9 +34,13 @@
   #define NVIC_ISER1           (*(volatile uint32_t*)(NVIC_ISER_BASE + 0x04UL))
 
   /* EXTI registers */
-  #define EXTI_PR              (*(volatile uint32_t*)(EXTI_BASE   + 0x14UL))
   #define EXTI_IMR             (*(volatile uint32_t*)(EXTI_BASE   + 0x00UL))
+  #define EXTI_EMR             (*(volatile uint32_t*)(EXTI_BASE   + 0x04UL))
+  #define EXTI_RTSR            (*(volatile uint32_t*)(EXTI_BASE   + 0x08UL))
   #define EXTI_FTSR            (*(volatile uint32_t*)(EXTI_BASE   + 0x0CUL))
+  #define EXTI_PR              (*(volatile uint32_t*)(EXTI_BASE   + 0x14UL))
+
+  /* SYSCFG registers */
   #define SYSCFG_EXTICR4       (*(volatile uint32_t*)(SYSCFG_BASE + 0x14UL))
 
   /* IWDG Registers */
@@ -66,6 +71,7 @@
   #define RCC_CIR              (*(volatile uint32_t*)(RCC_BASE + 0x0CUL))
   #define RCC_APB1ENR          (*(volatile uint32_t*)(RCC_BASE + 0x40UL))
   #define RCC_APB2ENR          (*(volatile uint32_t*)(RCC_BASE + 0x44UL))
+  #define RCC_BDCR             (*(volatile uint32_t*)(RCC_BASE + 0x70UL))
   #define RCC_CSR              (*(volatile uint32_t*)(RCC_BASE + 0x74UL))
 
   /* PWR registers */
@@ -125,6 +131,16 @@
   #define DMA1_STREAM6_PAR     (*(volatile uint32_t*)(DMA1_BASE + 0xA8UL))
   #define DMA1_STREAM6_M0AR    (*(volatile uint32_t*)(DMA1_BASE + 0xB4UL))
 
+  /* RTC registers */
+  #define RTC_TR               (*(volatile uint32_t*)(RTC_BASE + 0x00UL))
+  #define RTC_DR               (*(volatile uint32_t*)(RTC_BASE + 0x04UL))
+  #define RTC_CR               (*(volatile uint32_t*)(RTC_BASE + 0x08UL))
+  #define RTC_ISR              (*(volatile uint32_t*)(RTC_BASE + 0x0CUL))
+  #define RTC_PRER             (*(volatile uint32_t*)(RTC_BASE + 0x10UL))
+  #define RTC_WUTR             (*(volatile uint32_t*)(RTC_BASE + 0x14UL))
+  #define RTC_WPR              (*(volatile uint32_t*)(RTC_BASE + 0x24UL))
+  #define RTC_ALRMAR           (*(volatile uint32_t*)(RTC_BASE + 0x1CUL))
+  #define RTC_ALRMBR           (*(volatile uint32_t*)(RTC_BASE + 0x20UL))
 
 
 #endif /* REG_2025_06_12_H */

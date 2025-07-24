@@ -119,6 +119,9 @@
     <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager">
       <UniqueIdentifier>{5bb86238-34c0-4c40-89e6-17fae0f24ae2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Src\Target\stm32f446re\C\Cdd\CddRTC">
+      <UniqueIdentifier>{4cb36191-a659-4757-8849-e160bd522d64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Target\Host\Mcal\mcal_gpt.cpp">
@@ -246,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager\CddStandbyModeManager.c">
       <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Target\stm32f446re\C\Cdd\CddRTC\CddRTC.c">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddRTC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager\CddStandbyModeManager.h">
       <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddStandbyModeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Target\stm32f446re\C\Cdd\CddRTC\CddRTC.h">
+      <Filter>Source Files\Src\Target\stm32f446re\C\Cdd\CddRTC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
