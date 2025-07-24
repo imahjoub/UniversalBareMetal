@@ -1,15 +1,24 @@
 #include "CddRTC.h"
+#include "stdbool.h"
 
 static uint8_t CddRTC_ExitInitMode (void);
 static uint8_t CddRTC_EnterInitMode(void);
 static void    CddRTC_SetDate(uint8_t Year, uint8_t Month, uint8_t Date, uint8_t WeekDay);
 static void    CddRTC_SetTime(uint8_t Hours, uint8_t Minutes, uint8_t Seconds, uint8_t Am_Pm);
+static void    CddRTC_SetAlarm(uint8_t Hours, uint8_t Minutes, uint8_t Seconds, uint8_t Am_Pm);
+static void    CddRTC_AlarmCallBack(void);
+       void    RTC_Alarm_IRQHandler(void);
 
 // Convert decimal to BCD macro
 #define DEC2BCD(x)  ((((x) / 10U) << 4U) | ((x) % 10U))
 #define BCD2DEC(x)  ((((x) >> 4U) * 10U) + ((x) & 0x0FU))
 
-void CddRTC_Init(void)
+#define  NVIC_RTC_ALARM_IRQ   41U
+
+volatile uint8_t CddRTC_AlarmOccured;
+
+
+void CddRTC_CalendarInit(void)
 {
   /* Enable clock to PWR */
   RCC_APB1ENR |= (uint32_t)(1U << 28U);
@@ -60,7 +69,6 @@ void CddRTC_Init(void)
 
   /* Enable the RTC regs write protection    */
   RTC_WPR = (uint8_t)0xFFUL;
-
 }
 
 static uint8_t CddRTC_EnterInitMode(void)
@@ -123,20 +131,112 @@ void CddRTC_ReadDate(uint8_t* Year, uint8_t* Month, uint8_t* Date, uint8_t* Week
   *WeekDay = (uint8_t)(       (DateReg >> 13U) & 0x07U);
 }
 
+static void CddRTC_SetAlarm(uint8_t Hours, uint8_t Minutes, uint8_t Seconds, uint8_t Am_Pm)
+{
+  // Set PM bit if am_pm == 1, clear if am_pm == 0
+  uint32_t pm_bit = (Am_Pm ? (1UL << 22) : 0UL);
+
+  /* Set Alarm A time */
+  /* MSK3 = 0 (Hours match)     */
+  /* MSK2 = 0 (Minutes match)   */
+  /* MSK1 = 0 (Seconds match)   */
+  RTC_ALRMAR &= (uint32_t)(~((1UL << 23U) | (1UL << 15U) | (1UL << 7U)));
+
+  RTC_ALRMAR |= ((1UL << 31U)                        |  /* MSK4 = 1 (Date don’t care) */
+                pm_bit                               |  /* AM-PM bit                  */
+                ((uint32_t)DEC2BCD(Hours)   << 16U)  |
+                ((uint32_t)DEC2BCD(Minutes) <<  8U)  |
+                ((uint32_t)DEC2BCD(Seconds) <<  0U));
+}
+
 
 void CddRTC_AlarmInit(void)
 {
+  /* Enable clock to PWR */
+  RCC_APB1ENR |= (uint32_t)(1U << 28U);
+
+  /* Enable backup access to config RTC      */
+  PWR_CR |= (uint32_t)(1UL << 8U);
+  //PWR_CR &= (uint32_t)(~(1UL << 8U));
+
+  /* Force Backup domaine reset              */
+  RCC_BDCR |= (uint32_t)(1UL << 16U);
+
+  /* Release Backup domain reset             */
+  RCC_BDCR &= (uint32_t)(~(1UL << 16U));
+
+  /* RTC clock source selection -> HSE       */
+  RCC_BDCR |= (uint32_t)(3UL << 8U);
+
+  /* RTC clock enable                        */
+  RCC_BDCR |= (uint32_t)(1UL << 15U);
+
+
   /* Disable RTC registers write protection */
+  /* See Ch. 22.3.5 in Reference manual for details */
+  RTC_WPR = 0xCAU;
+  RTC_WPR = 0x53U;
+
   /* Enter the initialization mode          */
-  /* Set desired Date                       */
-  /* Set desired Time                       */
+  while(CddRTC_EnterInitMode()) { };
+
+  /* Set Date to 2025-07-15, Tuesday (weekday = 2) */
+  CddRTC_SetDate(25U, 7U, 15U, 2U);
+
+  /* Set Time to 09:45:30 AM in 24-hour mode (am_pm = 0) */
+  CddRTC_SetTime(20U, 58U, 0U, 0U);
+
   /* Set Alarm                              */
+  CddRTC_SetAlarm(21U, 0U, 0U, 0U);
+
   /* Ignore Weekday                         */
+  RTC_ALRMAR |=(uint32_t)((1UL << 31U));
+
   /* Enable Alarm                           */
-  /* Enable Alarm  Interrupt                */
-  /* Configure RTC Alarm interrupt          */
+  RTC_CR |=(uint32_t)((1UL << 8U));
+
+  /* Clear Alarm A Flag                     */
+  RTC_ISR &= (uint32_t)(~(1UL << 8U));
+
+  /* Enable Alarm A Interrupt               */
+  RTC_CR |=(uint32_t)((1UL << 12U));
+
+  /* Configure RTC Alarm interrupt                    */
+  /* EXTI Line 17 is connected to the RTC Alarm event */
+  EXTI_IMR  |= (uint32_t)(1UL << 17U);
+  /* Rising trigger selection */
+  EXTI_RTSR |= (uint32_t)(1UL << 17U);
+
   /* Enable Alarm Interrupt in NVIC         */
+  NVIC_ISER1 |= (1UL << (NVIC_RTC_ALARM_IRQ - 32U));
+
   /* Exit the initialization mode            */
+  while(!CddRTC_ExitInitMode()) { }
+
   /* Enable the RTC regs write protection    */
+  RTC_WPR = (uint8_t)0xFFUL;
 
 }
+
+static void CddRTC_AlarmCallBack(void)
+{
+  /* Do the following or Blink a LED */
+  CddRTC_AlarmOccured = 0x12;
+}
+
+void RTC_Alarm_IRQHandler(void)
+{
+  /* Check if Alarm A flag is set */
+  if(RTC_ISR & (1UL << 8U))
+  {
+    /* Clear Alarm A flag */
+    RTC_ISR &= ~(1UL << 8U);
+
+    /* Alarm call back function */
+    CddRTC_AlarmCallBack();
+  }
+
+  /*  Clear EXTI line 17 pending bit */
+  EXTI_PR |= (1UL << 17U);
+}
+

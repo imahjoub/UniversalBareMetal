@@ -34,9 +34,13 @@
   #define NVIC_ISER1           (*(volatile uint32_t*)(NVIC_ISER_BASE + 0x04UL))
 
   /* EXTI registers */
-  #define EXTI_PR              (*(volatile uint32_t*)(EXTI_BASE   + 0x14UL))
   #define EXTI_IMR             (*(volatile uint32_t*)(EXTI_BASE   + 0x00UL))
+  #define EXTI_EMR             (*(volatile uint32_t*)(EXTI_BASE   + 0x04UL))
+  #define EXTI_RTSR            (*(volatile uint32_t*)(EXTI_BASE   + 0x08UL))
   #define EXTI_FTSR            (*(volatile uint32_t*)(EXTI_BASE   + 0x0CUL))
+  #define EXTI_PR              (*(volatile uint32_t*)(EXTI_BASE   + 0x14UL))
+
+  /* SYSCFG registers */
   #define SYSCFG_EXTICR4       (*(volatile uint32_t*)(SYSCFG_BASE + 0x14UL))
 
   /* IWDG Registers */
@@ -135,6 +139,8 @@
   #define RTC_PRER             (*(volatile uint32_t*)(RTC_BASE + 0x10UL))
   #define RTC_WUTR             (*(volatile uint32_t*)(RTC_BASE + 0x14UL))
   #define RTC_WPR              (*(volatile uint32_t*)(RTC_BASE + 0x24UL))
+  #define RTC_ALRMAR           (*(volatile uint32_t*)(RTC_BASE + 0x1CUL))
+  #define RTC_ALRMBR           (*(volatile uint32_t*)(RTC_BASE + 0x20UL))
 
 
 #endif /* REG_2025_06_12_H */

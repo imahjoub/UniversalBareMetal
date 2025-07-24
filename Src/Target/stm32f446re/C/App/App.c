@@ -21,7 +21,8 @@ void Blinky_Task         (void);
 void EXTI15_10_IRQHandler(void);
 void IWDG_Task           (void);
 void WWDG_Task           (void);
-void RTC_Calender_Task   (void);
+void RTC_Alarm_Task      (void);
+void RTC_Calendar_Task   (void);
 void Pwm_Task            (void);
 void msDelay             (uint32_t ms);
 
@@ -43,21 +44,36 @@ int main(void)
 
   /* Run a Task */
   //Blinky_Task();
-  RTC_Calender_Task();
+  //RTC_Calendar_Task();
+  RTC_Alarm_Task();
 
 }
 
 /***********************************************************************/
 /*                                TASKS                                */
 /***********************************************************************/
-/* --- RTC Task --- */
+/* --- RTC Alarm Task --- */
+void RTC_Alarm_Task(void)
+{
+  // CddRTC_CalendarInit();
+
+  CddRTC_AlarmInit();
+
+  while(1)
+  {
+
+  }
+
+}
+
+/* --- RTC Calendar Task --- */
 
 uint8_t DateBuffer[5U];
 uint8_t TimeBuffer[5U];
 
-void RTC_Calender_Task(void)
+void RTC_Calendar_Task(void)
 {
-  CddRTC_Init();
+  CddRTC_CalendarInit();
 
   while(1U)
   {

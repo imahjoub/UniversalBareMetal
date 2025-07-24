@@ -3,8 +3,8 @@
 
   #include "Mcal/Reg.h"
 
-  void CddRTC_Init     (void);
-  void CddRTC_AlarmInit(void);
+  void CddRTC_AlarmInit    (void);
+  void CddRTC_CalendarInit (void);
   void CddRTC_ReadDate(uint8_t* Year, uint8_t* Month, uint8_t* Date, uint8_t* WeekDay);
   void CddRTC_ReadTime(uint8_t* Hours, uint8_t* Minutes, uint8_t* Seconds, uint8_t* Am_Pm);
 
