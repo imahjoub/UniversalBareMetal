@@ -43,9 +43,7 @@ int main(void)
   EXTI_Init();
 
   /* Run a Task */
-  //Blinky_Task();
-  //RTC_Calendar_Task();
-  RTC_Alarm_Task();
+  Blinky_Task();
 
 }
 
