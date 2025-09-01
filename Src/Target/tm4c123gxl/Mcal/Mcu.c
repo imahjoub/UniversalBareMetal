@@ -24,38 +24,35 @@ void SystemInit(void)
 
 void SetSysClock(void)
 {
-  /* Enable USERCC2 in RCC2 to use RCC2 for advanced features */
-  SYSCTL_RCC2_R |= (uint32_t)(1UL << 31U);   /* Set bit 31 to enable RCC2 */
+  /* Use RCC2 for advanced features */
+  SYSCTL_RCC2_R |= (uint32_t)SYSCTL_RCC2_USERCC2;
 
-   /* Bypass the PLL while initializing */
-  SYSCTL_RCC2_R |= (uint32_t)(1UL << 11U);   /* Set bit 11 to bypass PLL */
+  /* Bypass PLL while initializing */
+  SYSCTL_RCC2_R |= (uint32_t)SYSCTL_RCC2_BYPASS2;
 
-  /* Set the crystal (attached to the main oscillator) value and oscillator source for 16 MHz */
-  SYSCTL_RCC_R &= (uint32_t)(~(0x7C0UL));     /* Clear bits 10:6 for XTAL */
-  SYSCTL_RCC_R |= (uint32_t)(0x15U << 6U);    /* Set XTAL value to 0x15 (16 MHz) */
+  /* Set crystal value and oscillator source */
+  SYSCTL_RCC_R  &= (uint32_t)(~0x000007C0UL);              /* Clear XTAL field               */
+  SYSCTL_RCC_R  += (uint32_t)SYSCTL_RCC_XTAL_16MHZ;        /* Set XTAL = 16 MHz              */
+  SYSCTL_RCC2_R &= (uint32_t)(~SYSCTL_RCC2_OSCSRC2_M);     /* Clear oscillator source field  */
+  SYSCTL_RCC2_R += (uint32_t)SYSCTL_RCC2_OSCSRC2_MO;       /* Set oscillator source to main  */
 
-  /* Select main oscillator (OSCSRC2 = 0) */
-  SYSCTL_RCC2_R &= (uint32_t)(~(0x70UL));
+  /* Activate PLL by clearing PWRDN */
+  SYSCTL_RCC2_R &= (uint32_t)(~SYSCTL_RCC2_PWRDN2);
 
-  /* Power up the PLL */
-  SYSCTL_RCC2_R &= ~(1UL << 13U);
+  /* Set system divider and enable 400 MHz PLL */
+  SYSCTL_RCC2_R |= (uint32_t)SYSCTL_RCC2_DIV400;      /* Use 400 MHz PLL */
+  SYSCTL_RCC2_R  = (uint32_t)((SYSCTL_RCC2_R & (uint32_t)(~0x1FC00000UL)) + ((uint32_t)(4UL << 22U)));  /* 400 / (4+1) = 80 MHz */
 
-  /* 5. Set the system divider for 80 MHz clock */
-  SYSCTL_RCC2_R |= (uint32_t)(1UL << 30U);        /* Set bit 30 to use DIV400 (400 MHz PLL output) */
-  SYSCTL_RCC2_R &= (uint32_t)(~(0x1FC00000UL));   /* Clear bits 28:22 for SYSDIV2 */
-  SYSCTL_RCC2_R |= (uint32_t)(0x04UL << 22U);    /* Set SYSDIV2 to 4, so 400 MHz / (4 + 1) = 80 MHz */
+  /* Wait for the PLL to lock */
+  while((SYSCTL_RIS_R & SYSCTL_RIS_PLLLRIS) == 0) { /* Do nothing */}
 
-  /* Wait for the PLL to lock by polling PLLLRIS */
-  while ((SYSCTL_RIS_R & (1UL << 6U)) == 0U)
-  {
-    /* Wait until bit 6 (PLLLRIS) is set, indicating PLL has locked */
-  }
+  /* Enable use of PLL by clearing BYPASS */
+  SYSCTL_RCC2_R &= (uint32_t)(~SYSCTL_RCC2_BYPASS2);
 
-  /* Enable the PLL */
-  SYSCTL_RCC2_R &= (uint32_t)(~(1UL << 11U));   /* Clear bit 11 to use PLL */
+  /* set the SysTick interrupt priority (highest) */
+  NVIC_SYS_PRI3_R &= ~0xE0000000;
 
   EnableInterrupts();
-
 }
 
 
